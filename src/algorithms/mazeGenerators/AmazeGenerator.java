@@ -9,5 +9,5 @@ public abstract class AmazeGenerator implements IMazeGenerator {
         return end-start;
     }
 
-
+//tal
 }
