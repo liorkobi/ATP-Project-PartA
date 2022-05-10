@@ -9,7 +9,7 @@ public class Maze {
     int[][] maze;
     Position start;
     Position exit;
-
+//try one
 
     public Maze(int r, int c) {
         row = r;
