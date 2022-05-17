@@ -84,10 +84,15 @@ public class Maze {
     }
 
 
+    public int getRow() {
+        return row;
+    }
 
+    public int getCol() {
+        return col;
+    }
 
-
-
-
-
+    public int getval(int i, int j) {
+        return maze[i][j];
+    }
 }

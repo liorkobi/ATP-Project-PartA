@@ -6,8 +6,8 @@ public abstract class AmazeGenerator implements IMazeGenerator {
         long start=System.currentTimeMillis();
         generate(r,c);
         long end=System.currentTimeMillis();
-        return end-start;
+        long res=end-start;
+        System.out.println(res);
+        return res;
     }
-
-//tal
 }
