@@ -101,7 +101,7 @@ public class Main {
             }
         }
     }
-/*
+
     private static boolean solveProblem(ISearchable domain, ISearchingAlgorithm searcher, int rows, int columns) {
         boolean testStatus = false;
         try {
@@ -117,7 +117,7 @@ public class Main {
         return testStatus;
     }
     //</editor-fold>
-    */
+
 
     public static void appendToResultsFile(String text) {
         try (java.io.FileWriter fw = new java.io.FileWriter(m_resultsFileName, true)) {

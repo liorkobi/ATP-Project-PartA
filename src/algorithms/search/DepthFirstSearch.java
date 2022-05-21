@@ -10,9 +10,9 @@ public class DepthFirstSearch extends BreadthFirstSearch{
 
 
 
-//    public DepthFirstSearch() {
-//     this.VQ= new Stack<AState>();
-//    }
+    public DepthFirstSearch() {
+     this.VQ= new Stack<AState>();
+    }
     @Override
     public String getName() {
         return "DepthFirstSearch";

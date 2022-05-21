@@ -67,3 +67,12 @@ Test finished!
 Test started!
 TEST Passed: generating maze (1000*1000) using SimpleMazeGenerator
 Test finished!
+Test started!
+TEST Passed: generating maze (1000*1000) using SimpleMazeGenerator
+Test finished!
+Test started!
+TEST Passed: generating maze (1000*1000) using SimpleMazeGenerator
+Test finished!
+Test started!
+TEST Passed: generating maze (1000*1000) using SimpleMazeGenerator
+Test finished!

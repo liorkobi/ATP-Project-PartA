@@ -1,6 +1,7 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public interface ISearchable {
     //add funcs from Smaze

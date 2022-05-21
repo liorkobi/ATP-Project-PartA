@@ -1,26 +1,30 @@
 package algorithms.search;
 
 import javax.print.attribute.standard.QueuedJobCount;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
+import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.TransferQueue;
 
 public class BreadthFirstSearch extends ASearchingAlgorithms{
     int counter;
-    Queue<AState> VQ;
     public BreadthFirstSearch() {
         this.counter =0;
-         this.VQ = new LinkedList<AState>();
+
+//        Comparator<AState> comparator = (o1, o2) -> {
+//            return 0;
+//        };
+        this.VQ = new LinkedTransferQueue<>();
     }
 
     public ISearchable BreadthFirstSearch(ISearchable problemC) {
+
         ISearchable problem=problemC.clone();
         AState Start=problem.getStart();
         Start.setColor(AState.color.gray);
         VQ.add(Start);
         while (!VQ.isEmpty()){
-            AState u=VQ.poll();
+            AState u=VQ.stream().findFirst().get();
+            VQ.remove(u);
             ArrayList<AState> uAdj=problem.getAllPossibleStates(u);
             for (int i=0;i<uAdj.size();i++){
                 AState v=uAdj.get(i);

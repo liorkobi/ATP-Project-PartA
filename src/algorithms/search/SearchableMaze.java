@@ -1,9 +1,9 @@
 package algorithms.search;
 
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SearchableMaze implements ISearchable,Cloneable{
 
