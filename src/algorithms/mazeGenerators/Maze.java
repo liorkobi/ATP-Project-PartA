@@ -63,7 +63,7 @@ public class Maze {
         }
     }
 
-    Position chooseRandom() {
+   private Position chooseRandom() {
         Random R = new Random();
         int frame = R.nextInt(4);
         Position randomP = new Position(R.nextInt(row), R.nextInt(col));

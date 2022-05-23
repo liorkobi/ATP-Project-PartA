@@ -5,7 +5,7 @@ import algorithms.mazeGenerators.Position;
 import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
-public abstract class AState  {
+public abstract class AState {
     public static enum color {white, gray, black}
 
     color Color;
@@ -47,8 +47,11 @@ public abstract class AState  {
     public String toString() {
         return String.format("MY color : %s", this.Color);
     }
-}
 
+    public int compareCost(AState state) {
+        return Integer.compare(this.cost, state.getCost());
+    }
+}
 
 //    @Override
 //    public boolean equals(Object A) {
