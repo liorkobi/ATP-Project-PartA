@@ -9,7 +9,7 @@ public class Maze {
     int[][] maze;
     Position start;
     Position exit;
-
+//try one
 
     public Maze(int r, int c) {
         row = r;
@@ -63,7 +63,7 @@ public class Maze {
         }
     }
 
-    Position chooseRandom() {
+   private Position chooseRandom() {
         Random R = new Random();
         int frame = R.nextInt(4);
         Position randomP = new Position(R.nextInt(row), R.nextInt(col));
@@ -84,10 +84,15 @@ public class Maze {
     }
 
 
+    public int getRow() {
+        return row;
+    }
 
+    public int getCol() {
+        return col;
+    }
 
-
-
-
-
+    public int getval(int i, int j) {
+        return maze[i][j];
+    }
 }
