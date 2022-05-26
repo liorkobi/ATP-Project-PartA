@@ -7,7 +7,7 @@ public class Position3D {
         int colidx;
         int depidx;
 
-        public Position3D(int rowidx, int colidx,int depidx) {
+        public Position3D(int depidx,int rowidx, int colidx) {
             this.rowidx = rowidx;
             this.colidx = colidx;
             this.depidx = depidx;
