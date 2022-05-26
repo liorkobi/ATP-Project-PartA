@@ -14,15 +14,17 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(50, 50);
+        Maze maze = mg.generate(1000, 1000);
         SearchableMaze searchableMaze = new SearchableMaze(maze);
-
+        int i=0;
+ while(i<1000){
      solveProblem(searchableMaze, new BreadthFirstSearch());
       solveProblem(searchableMaze, new DepthFirstSearch());
-      solveProblem(searchableMaze, new BestFirstSearch());
+    solveProblem(searchableMaze, new BestFirstSearch());
+    i++;}
 
         // prints the maze
-        //  maze.print();
+        //maze.print();
 
 
 // get the maze entrance
@@ -42,9 +44,9 @@ public class RunSearchOnMaze {
         //Printing Solution Path
         System.out.println("Solution path:");
         ArrayList<AState> solutionPath = solution.getSolutionPath();
-         for (int i = 0; i < solutionPath.size(); i++) {
-           System.out.println(String.format("%s. %s",i,solutionPath.get(i)));
-        }
+//         for (int i = 0; i < solutionPath.size(); i++) {
+//           System.out.println(String.format("%s. %s",i,solutionPath.get(i)));
+//        }
     }
 
 }

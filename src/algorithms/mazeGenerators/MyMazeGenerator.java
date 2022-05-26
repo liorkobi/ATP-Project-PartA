@@ -79,23 +79,5 @@ public class MyMazeGenerator extends AmazeGenerator {
 
     }
 
-    /*
-    private boolean isValidCell(Maze m,Cell c){
-       //down
-        if(c.getColidx()<=m.col-1 && c.getRowidx()+1<m.row-1)
-            return true;
-        //up
-        if(c.getColidx()<=m.col-1 && c.getRowidx()-1<m.row-1)
-            return true;
-        //right
-        if(c.getColidx()<=m.col-1 && c.getRowidx()+1<m.row-1)
-            return true;
-        //left
-        if(c.getColidx()<=m.col-1 && c.getRowidx()+1<m.row-1)
-            return true;
-        return false;
 
-    }
-
-     */
 }

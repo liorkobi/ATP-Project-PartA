@@ -19,21 +19,22 @@ public class DepthFirstSearch extends ASearchingAlgorithms{
     private ISearchable  DFS_REC(ISearchable problem,AState c){
 
         if (c.equals(problem.getGoal())){return problem;}
-        else{
+//        else {
             c.setColor(AState.color.gray);
-        ArrayList<AState> uAdj=problem.getAllPossibleStates(c);
+            ArrayList<AState> uAdj = problem.getAllPossibleStates(c);
 
-        for (int i=0;i<uAdj.size();i++){
-            if(uAdj.get(i).getColor()== AState.color.white){
-                uAdj.get(i).setParent(c);
-                counter++;
-            DFS_REC(problem,uAdj.get(i));}
-            c.setColor(AState.color.black);
+            for (int i = 0; i < uAdj.size(); i++) {
+                if (uAdj.get(i).getColor() == AState.color.white) {
+                    uAdj.get(i).setParent(c);
+                    counter++;
+                    DFS_REC(problem, uAdj.get(i));
+                }
+                c.setColor(AState.color.black);
 
             }
-        return problem;}}
-
-
+//        return problem;}}
+//
+        }
     public void TheShortestPath(ISearchable p,Solution S,AState curr){
         if (curr==p.getStart()) {
             S.setSol(p.getStart());
