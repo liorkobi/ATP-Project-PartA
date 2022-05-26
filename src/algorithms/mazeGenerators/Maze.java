@@ -95,4 +95,12 @@ public class Maze {
     public int getval(int i, int j) {
         return maze[i][j];
     }
+
+    public void setStart(Position start) {
+        this.start = start;
+    }
+
+    public void setExit(Position exit) {
+        this.exit = exit;
+    }
 }

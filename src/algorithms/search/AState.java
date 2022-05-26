@@ -48,9 +48,9 @@ public abstract class AState {
         return String.format("MY color : %s", this.Color);
     }
 
-    public int compareCost(AState state) {
-        return Integer.compare(this.cost, state.getCost());
-    }
+//    public int compareCost(AState state) {
+//        return Integer.compare(this.cost, state.getCost());
+//    }
 }
 
 //    @Override

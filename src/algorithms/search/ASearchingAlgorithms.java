@@ -10,6 +10,17 @@ public abstract class ASearchingAlgorithms implements ISearchingAlgorithm {
         this.counter = 0;
     }
 
+    protected void TheShortestPath(ISearchable p,Solution S,AState curr){
+        if (curr==p.getStart()) {
+            S.setSol(p.getStart());
+        }
+        else {
+            if (curr.getParent()!=null){
+                S.setSol(curr);
+                TheShortestPath(p,S,curr.getParent());}
+        }
+    }
+
 
 
 }
