@@ -7,14 +7,7 @@ import java.util.PriorityQueue;
 
 public class BestFirstSearch extends BreadthFirstSearch {
     public BestFirstSearch() {
-        Comparator<AState> comparator = (o1, o2) -> {
-            if (o1.getCost() < o2.getCost())
-                return -1;
-            if (o1.getCost() > o2.getCost())
-                return 1;
-
-            return 0;
-        };
+        Comparator<AState> comparator = Comparator.comparingInt(AState::getCost);
 
      this.VQ =new PriorityQueue<AState>(comparator);
 

@@ -1,9 +1,6 @@
 package algorithms.search;
 
-import javax.print.attribute.standard.QueuedJobCount;
 import java.util.*;
-import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.TransferQueue;
 
 public class BreadthFirstSearch extends ASearchingAlgorithms{
     public BreadthFirstSearch() {
@@ -44,8 +41,6 @@ public int getNumberOfNodesEvaluated(){
         ISearchable p=BFS(domain);
         Solution S=new Solution();
         TheShortestPath(p,S,p.getGoal());
-
-
         return S;
 
 }

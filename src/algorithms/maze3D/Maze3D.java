@@ -41,7 +41,7 @@ public class Maze3D {
                 Position3D exitP = chooseRandom();
                 //goal point cant be WALL ot equal to start point.
                 while (bool) {
-                    if (maze[exitP.rowidx][exitP.colidx][exitP.depidx] == 0 && !(exitP.equals(start))){
+                    if (maze[exitP.depidx][exitP.rowidx][exitP.colidx] == 0 && !(exitP.equals(start))){
                         bool = false;}
                     else {
                         exitP = chooseRandom();
@@ -52,61 +52,78 @@ public class Maze3D {
             return exit;
         }
 
-        public void print(){
-            if(start!=null && exit!=null) {
-                char[][][] charArr = new char[depth][row][col];
-                for (int i = 0; i < depth; i++) {
-                    for (int j = 0; j < row; j++) {
-                        for (int k = 0; k < col; k++) {
-                            charArr[i][j][k] = (char) ('0' + maze[i][j][k]);
-                    }}
-                }
-                charArr[exit.getDepthIndex()][exit.getRowIndex()][exit.getColumnIndex()]='E';
-                charArr[start.getDepthIndex()][start.getRowIndex()][start.getColumnIndex()]='S';
-                for (int i = 0; i < depth; i++) {
-                    for (int j = 0; j < row; j++) {
 
-                        System.out.println(Arrays.toString(charArr[i][j]));}
-            }
-        }}
+        public void print(){
+//            if(start!=null && exit!=null) {
+//                char[][][] charArr = new char[depth][row][col];
+//                for (int i = 0; i < depth; i++) {
+//                    for (int j = 0; j < row; j++) {
+//                        for (int k = 0; k < col; k++) {
+//                            charArr[i][j][k] = (char) ('0' + maze[i][j][k]);
+//                    }}
+//                }
+//                charArr[exit.getDepthIndex()][exit.getRowIndex()][exit.getColumnIndex()]='E';
+//                charArr[start.getDepthIndex()][start.getRowIndex()][start.getColumnIndex()]='S';
+//                for (int i = 0; i < depth; i++) {
+//                    for (int j = 0; j < row; j++) {
+//
+//                        System.out.println(Arrays.toString(charArr[i][j]));}
+//            }
+
+                for (int i = 0; i < depth; i++) {
+                    System.out.println("{");
+                    for (int j = 0; j < row; j++) {
+                        System.out.println("{");
+                        System.out.println(Arrays.toString(maze[i][j]));
+//                        for (int k = 0; k < col; k++) {
+//                            System.out.println(maze[i][j][k]);
+//                        }}
+                }}
+        }
 
        private Position3D chooseRandom() {
             Random R = new Random();
             int frame = R.nextInt(6);
             Position3D randomP = new Position3D(R.nextInt(row), R.nextInt(col),R.nextInt(depth));
-            //פאה עליונה
-            if (frame == 0) {
-                randomP.setRowidx(0);
-                randomP.setColidx(R.nextInt(col));
-                randomP.setDepidx(R.nextInt(depth));
-                //פאה תחתונה
-            } else if (frame == 1) {
-                randomP.setRowidx(row-1);
-                randomP.setColidx(R.nextInt(col));
-                randomP.setDepidx(R.nextInt(depth));
-                //פאה קדמית
-            } else if (frame == 2) {
-                randomP.setDepidx(0);
-                randomP.setColidx(R.nextInt(col));
-                randomP.setRowidx(R.nextInt(row));
 
-                //פאה אחורית
-            } else if (frame == 3){
-                randomP.setDepidx(depth-1);
-                randomP.setRowidx(R.nextInt(row));
-                randomP.setColidx(col);}
-           //פאה ימנית
-            else if (frame == 4){
-                randomP.setDepidx(R.nextInt(depth));
-                randomP.setRowidx(R.nextInt(row));
-                randomP.setColidx(col-1);
-                //פאה שמאלית
-            }else{
-                randomP.setDepidx(R.nextInt(depth));
-                randomP.setRowidx(R.nextInt(row));
-                randomP.setColidx(0);
-            }
-            return randomP;
+           randomP.setRowidx(0);
+           randomP.setColidx(R.nextInt(10));
+           randomP.setDepidx(R.nextInt(10));
+
+//            //פאה עליונה
+//            if (frame == 0) {
+//                randomP.setRowidx(0);
+//                randomP.setColidx(R.nextInt(col));
+//                randomP.setDepidx(R.nextInt(depth));
+//                //פאה תחתונה
+//            } else if (frame == 1) {
+//                randomP.setRowidx(row-1);
+//                randomP.setColidx(R.nextInt(col));
+//                randomP.setDepidx(R.nextInt(depth));
+//                //פאה קדמית
+//            } else if (frame == 2) {
+//                randomP.setDepidx(0);
+//                randomP.setColidx(R.nextInt(col));
+//                randomP.setRowidx(R.nextInt(row));
+//
+//                //פאה אחורית
+//            } else if (frame == 3){
+//                randomP.setDepidx(depth-1);
+//                randomP.setRowidx(R.nextInt(row));
+//                randomP.setColidx(col);}
+//           //פאה ימנית
+//            else if (frame == 4){
+//                randomP.setDepidx(R.nextInt(depth));
+//                randomP.setRowidx(R.nextInt(row));
+//                randomP.setColidx(col-1);
+//                //פאה שמאלית
+//            }else{
+//                randomP.setDepidx(R.nextInt(depth));
+//                randomP.setRowidx(R.nextInt(row));
+//                randomP.setColidx(0);
+//            }
+//            return randomP;
+           return randomP;
         }
 
 

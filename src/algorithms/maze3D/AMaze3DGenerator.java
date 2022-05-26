@@ -7,7 +7,6 @@ public abstract class AMaze3DGenerator implements IMazeGenerator3D {
         generate(depth,r,c);
         long end=System.currentTimeMillis();
         long res=end-start;
-        System.out.println(res);
         return res;
     }
 }

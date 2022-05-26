@@ -9,9 +9,12 @@ public class Maze {
     int[][] maze;
     Position start;
     Position exit;
-//try one
 
     public Maze(int r, int c) {
+        if(r<0 || c<0){
+            r=0;
+            c=0;
+        }
         row = r;
         col = c;
         maze = new int[row][col];
@@ -93,8 +96,13 @@ public class Maze {
     }
 
     public int getval(int i, int j) {
+        if(i<row && i>=0 && j<col && j>=0)
         return maze[i][j];
+        else {return -1;}
     }
+
+    //delete before submission!!!
+
 
     public void setStart(Position start) {
         this.start = start;
