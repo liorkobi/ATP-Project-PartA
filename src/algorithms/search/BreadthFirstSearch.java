@@ -39,19 +39,6 @@ public int getNumberOfNodesEvaluated(){
         return counter;}
 
 
-    public void TheShortestPath(ISearchable p,Solution S,AState curr){
-
-        if (curr==p.getStart()) {
-            S.setSol(p.getStart());
-        }
-        else {
-            if (curr.getParent()!=null){
-                S.setSol(curr);
-                TheShortestPath(p,S,curr.getParent());}
-        }
-
-        }
-
     @Override
     public Solution solve(ISearchable domain){
         ISearchable p=BFS(domain);

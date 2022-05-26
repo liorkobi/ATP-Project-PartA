@@ -3,47 +3,54 @@ package algorithms.search;
 import java.util.*;
 
 public class DepthFirstSearch extends ASearchingAlgorithms{
+    Stack<AState> stack;
 
     public DepthFirstSearch(){
-
+         stack = new Stack<>();
     }
-
-
-
-
     public ISearchable DFS(ISearchable problemC){
         ISearchable problem=problemC.clone();
+        AState c= problem.getStart();
+        // push the source node into the stack
+        stack.push(c);
 
-        return DFS_REC(problem,problem.getStart());
-         }
-    private ISearchable  DFS_REC(ISearchable problem,AState c){
+        // loop till stack is empty
+        while (!stack.empty())
+        {
+            // Pop a vertex from the stack
+            c = stack.pop();
 
-        if (c.equals(problem.getGoal())){return problem;}
-        else{
-            c.setColor(AState.color.gray);
-        ArrayList<AState> uAdj=problem.getAllPossibleStates(c);
-
-        for (int i=0;i<uAdj.size();i++){
-            if(uAdj.get(i).getColor()== AState.color.white){
-                uAdj.get(i).setParent(c);
-                counter++;
-            DFS_REC(problem,uAdj.get(i));}
-            c.setColor(AState.color.black);
-
+            // if the vertex is already discovered yet, ignore it
+            if (c.getColor() == AState.color.gray) {
+                continue;
             }
-        return problem;}}
+            ArrayList<AState> uAdj=problem.getAllPossibleStates(c);
+
+            // we will reach here if the popped vertex `v` is not discovered yet;
+            // print `v` and process its undiscovered adjacent nodes into the stack
+            c.setColor(AState.color.gray);
+            counter++;
 
 
-    public void TheShortestPath(ISearchable p,Solution S,AState curr){
-        if (curr==p.getStart()) {
-            S.setSol(p.getStart());
+            // do for every edge (v, u)
+            for (int i = uAdj.size() - 1; i >= 0; i--)
+            {
+                AState u = uAdj.get(i);
+                if (u.getColor() == AState.color.white) {
+                    u.setParent(c);
+
+                    stack.push(u);
+
+                }
+            }
+            c.setColor(AState.color.black);
+            if (c.equals(problem.getGoal())){break;}
         }
-        else {
-            if (curr.getParent()!=null){
-                S.setSol(curr);
-                TheShortestPath(p,S,curr.getParent());}
-        }
-    }
+        return problem;}
+
+
+
+
 
 
     @Override
