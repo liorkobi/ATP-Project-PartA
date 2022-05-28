@@ -12,22 +12,7 @@ public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
         Maze maze = mg.generate(10, 10);
-//        int[][] n;
-//           n= new int[][]{
-//                   {1,1,1,1,1,1,1,1,1,1},
-//                   {1,0,1,0,1,0,1,0,0,0},
-//                   {1,0,1,0,1,0,1,1,1,0},
-//                   {1,0,0,0,0,0,0,0,1,0},
-//                   {1,0,1,0,1,1,1,0,1,0},
-//                   {1,0,1,0,1,0,0,0,0,0},
-//                   {1,1,1,1,1,0,1,1,1,0},
-//                   {1,0,0,0,0,0,1,0,0,0},
-//                   {1,1,1,1,1,0,1,1,1,0},
-//                   {1,0,0,0,0,0,0,0,1,0},
-//           };
-//           maze.setExit(new Position(5,9));
-//           maze.setStart(new Position(9,6));
-//            maze.setmaze(n);
+
         SearchableMaze searchableMaze = new SearchableMaze(maze);
 
     solveProblem(searchableMaze, new BreadthFirstSearch());
@@ -35,7 +20,7 @@ public class RunSearchOnMaze {
        solveProblem(searchableMaze, new BestFirstSearch());
 
         // prints the maze
-       //  maze.print();
+        maze.print();
 
 
 // get the maze entrance
@@ -55,9 +40,9 @@ public class RunSearchOnMaze {
         //Printing Solution Path
         System.out.println("Solution path:");
         ArrayList<AState> solutionPath = solution.getSolutionPath();
-//         for (int i = 0; i < solutionPath.size(); i++) {
-//           System.out.println(String.format("%s. %s",i,solutionPath.get(i)));
-//        }
+         for (int i = 0; i < solutionPath.size(); i++) {
+           System.out.println(String.format("%s. %s",i,solutionPath.get(i)));
+        }
     }
 
 }

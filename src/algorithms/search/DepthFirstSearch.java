@@ -40,7 +40,6 @@ public class DepthFirstSearch extends ASearchingAlgorithms{
                 if (u.getColor() == AState.color.white) {
                     u.setParent(c);
                     stack.push(u);
-//                    if (u.equals(problem.getGoal())){counter++;return problem;}
                 }
             }
             c.setColor(AState.color.black);
