@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.zip.Inflater;
 public abstract class AState {
-    public static enum color {white, gray, black}
 
-    color Color;
-    AState Parent;
-    int cost;
+     public enum color {white, gray, black}
+
+    protected  color Color;
+    protected AState Parent;
+    protected  int cost;
 
     public AState() {
         Parent = null;
@@ -41,36 +42,9 @@ public abstract class AState {
     }
 
     public void setParent(AState parent) {
-        Parent = parent;
+        if (parent != null)
+            Parent = parent;
     }
 
-    public String toString() {
-        return String.format("MY color : %s", this.Color);
-    }
-
-//    public int compareCost(AState state) {
-//        return Integer.compare(this.cost, state.getCost());
-//    }
 }
-
-//    @Override
-//    public boolean equals(Object A) {
-//
-//        // If the object is compared with itself then return true
-//        if (A == this) {
-//            return true;
-//        }
-//
-//
-//        /* Check if o is an instance of Complex or not
-//          "null instanceof [type]" also returns false */
-//        if (!(A instanceof AState)) {
-//            return false;
-//        }
-//        AState a = (AState) A;
-//if (Color.equals(((AState) A).Color) && Parent.equals())
-//    }
-//
-//    }
-
 

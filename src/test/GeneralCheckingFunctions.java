@@ -5,4 +5,10 @@ public class GeneralCheckingFunctions {
         boolean weChoseToDoTheMaze3DAssignment=true;
         return weChoseToDoTheMaze3DAssignment;
     }
+
+    public static String getGithubLink(){
+        String githubLink ="https://github.com/liorkobi/ATP-Project-PartA";
+        return githubLink;
+    }
+
 }

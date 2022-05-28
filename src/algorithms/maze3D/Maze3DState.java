@@ -1,24 +1,24 @@
-package algorithms.search;
+package algorithms.maze3D;
 
 import algorithms.mazeGenerators.Position;
-import java.util.ArrayList;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
+
+public class Maze3DState extends AState {
+
+    Position3D p;
 
 
-public class MazeState extends AState {
-
-    Position p;
-
-
-    public MazeState(int r, int c) {
+    public Maze3DState(int d,int r, int c) {
         Color = color.white;
-        this.p = new Position(r,c);
+        this.p = new Position3D(d,r,c);
     }
 
     //AState's status for the searching algorithms
 //    public color getColor() {
 //        return Color;
 //    }
-
+//
 //    public void setColor(color color) {
 //        Color = color;
 //    }
@@ -35,12 +35,15 @@ public class MazeState extends AState {
         if (P == this) {
             return true;
         }
-        if (!(P instanceof MazeState)) {
+        if (!(P instanceof Maze3DState)) {
             return false;
         }
-        MazeState M = (MazeState) P;
+        Maze3DState M = (Maze3DState) P;
 
         return this.p.equals(M.p);
     }
 
+
 }
+
+

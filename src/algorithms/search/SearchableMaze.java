@@ -3,7 +3,6 @@ package algorithms.search;
 import algorithms.mazeGenerators.Maze;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class SearchableMaze implements ISearchable,Cloneable{
 
@@ -14,29 +13,33 @@ public class SearchableMaze implements ISearchable,Cloneable{
 
 
     public SearchableMaze(Maze maze) {
-         V2D = new MazeState[maze.getRow()][maze.getCol()];
         Start=null;
         Goal=null;
-        m=maze;
-        buildVertexList(m);
+        if(maze.getCol()>0 && maze.getRow()>0){
+             m=maze;
+            V2D = new MazeState[maze.getRow()][maze.getCol()];
+            buildVertexList(m);}
+        else {
+            m=null;
+            V2D = null;}
 
 
 
     }
 public SearchableMaze(SearchableMaze S){
-        V2D=S.V2D;
         Start=S.Start;
         Goal=S.Goal;
         m=S.m;
+        V2D = new MazeState[m.getRow()][m.getCol()];
         buildVertexList(m);
 
+
 }
-    public void buildVertexList(Maze maze){
+    private void buildVertexList(Maze maze){
         for(int i=0;i<maze.getRow();i++){
             for(int j=0;j<maze.getCol();j++){
                 if(maze.getval(i,j)==0){
                     MazeState v=new MazeState(i,j);
-                    v.setCost(10);
                     V2D[i][j]=v;
                 }
             }
@@ -57,17 +60,17 @@ public SearchableMaze(SearchableMaze S){
 
 
     //up
-    public boolean checkUp(MazeState v, Maze m) {
+    private boolean checkUp(MazeState v, Maze m) {
         if(v==null){return false;}
         return v.p.getRowIndex() - 1 >= 0 && m.getval(v.p.getRowIndex() - 1, v.p.getColumnIndex()) == 0;
     }
 
     //down
-        public boolean checkDown(MazeState v, Maze m){
+    private boolean checkDown(MazeState v, Maze m){
             if(v==null){return false;}
             return v.p.getRowIndex() + 1 < m.getRow() && m.getval(v.p.getRowIndex() + 1, v.p.getColumnIndex()) == 0;
         }
-    public boolean checkUR(MazeState v, Maze m){
+    private boolean checkUR(MazeState v, Maze m){
         if(v==null){return false;}
         return v.p.getColumnIndex() +1 < m.getCol() && v.p.getRowIndex() - 1 >= 0 && m.getval(v.p.getRowIndex() - 1, v.p.getColumnIndex()+1) == 0;
     }
@@ -75,30 +78,30 @@ public SearchableMaze(SearchableMaze S){
         if(v==null){return false;}
         return v.p.getColumnIndex() +1 < m.getCol() && v.p.getRowIndex() + 1 < m.getRow() && m.getval(v.p.getRowIndex() + 1, v.p.getColumnIndex()+1) == 0;
     }
-    public boolean checkDL(MazeState v, Maze m){
+    private boolean checkDL(MazeState v, Maze m){
         if(v==null){return false;}
         return v.p.getColumnIndex() -1 >=0 && v.p.getRowIndex() + 1 < m.getRow() && m.getval(v.p.getRowIndex() + 1, v.p.getColumnIndex()-1) == 0;
     }
 
-    public boolean checkUL(MazeState v, Maze m){
+    private boolean checkUL(MazeState v, Maze m){
         if(v==null){return false;}
         return v.p.getColumnIndex() -1 >=0 && v.p.getRowIndex() - 1>=0 && m.getval(v.p.getRowIndex() - 1, v.p.getColumnIndex()-1) == 0;
     }
 
 
         //right
-        public boolean checkRight(MazeState v, Maze m) {
+        private boolean checkRight(MazeState v, Maze m) {
         if(v==null){return false;}
             return v.p.getColumnIndex() + 1 < m.getCol() && m.getval(v.p.getRowIndex(), v.p.getColumnIndex() + 1) == 0;
         }
 
         //left
-        public boolean checkLeft(MazeState v, Maze m) {
+        private boolean checkLeft(MazeState v, Maze m) {
             if(v==null){return false;}
             return v.p.getColumnIndex() - 1 >= 0 && m.getval(v.p.getRowIndex(), v.p.getColumnIndex() - 1) == 0;
         }
 
-    public ArrayList<AState> buildAdjacentList(MazeState v) {
+    private ArrayList<AState> buildAdjacentList(MazeState v) {
         ArrayList<AState> Adj = new ArrayList<AState>();
         //up
         if (checkUp(v, m)) {
@@ -117,7 +120,7 @@ public SearchableMaze(SearchableMaze S){
         //right
         if (checkRight(v, m)) {
             Adj.add(V2D[v.p.getRowIndex()][v.p.getColumnIndex() + 1]);
-            V2D[v.p.getRowIndex()][v.p.getColumnIndex() + 1].setCost(10+v.getCost());
+            V2D[v.p.getRowIndex()][v.p.getColumnIndex()+1].setCost(10+v.getCost());
 
         }
         //DR diagonal
@@ -131,7 +134,7 @@ public SearchableMaze(SearchableMaze S){
         //down
         if (checkDown(v, m)) {
             Adj.add(V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex()]);
-            V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex()].setCost(10+v.getCost());
+            V2D[v.p.getRowIndex() +1][v.p.getColumnIndex()].setCost(10+v.getCost());
 
         }
         //DL diagonal
@@ -144,14 +147,14 @@ public SearchableMaze(SearchableMaze S){
         //left
         if (checkLeft(v, m)) {
             Adj.add(V2D[v.p.getRowIndex()][v.p.getColumnIndex() - 1]);
-            V2D[v.p.getRowIndex()][v.p.getColumnIndex() - 1].setCost(10+v.getCost());
+            V2D[v.p.getRowIndex()][v.p.getColumnIndex()-1].setCost(10+v.getCost());
 
         }
         //UL diagonal
         if (checkLeft(v, m) || (checkUp(v, m))){
             if (checkUL(v,m)) {
                 Adj.add(V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1]);
-                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1].setCost(v.getCost()+15);
+                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1].setCost(15+v.getCost());
             }}
 
 

@@ -29,9 +29,6 @@ public class Maze3D {
         }
 
         public Position3D getStartPosition() {
-            if (start == null && depth>0 && row > 0 && col > 0) {
-                start = chooseRandom();
-            }
             return start;
         }
 
@@ -41,7 +38,7 @@ public class Maze3D {
                 Position3D exitP = chooseRandom();
                 //goal point cant be WALL ot equal to start point.
                 while (bool) {
-                    if (maze[exitP.rowidx][exitP.colidx][exitP.depidx] == 0 && !(exitP.equals(start))){
+                    if (maze[exitP.depidx][exitP.rowidx][exitP.colidx] == 0 && !(exitP.equals(start))){
                         bool = false;}
                     else {
                         exitP = chooseRandom();
@@ -52,23 +49,35 @@ public class Maze3D {
             return exit;
         }
 
-        public void print(){
-            if(start!=null && exit!=null) {
-                char[][][] charArr = new char[depth][row][col];
-                for (int i = 0; i < depth; i++) {
-                    for (int j = 0; j < row; j++) {
-                        for (int k = 0; k < col; k++) {
-                            charArr[i][j][k] = (char) ('0' + maze[i][j][k]);
-                    }}
-                }
-                charArr[exit.getDepthIndex()][exit.getRowIndex()][exit.getColumnIndex()]='E';
-                charArr[start.getDepthIndex()][start.getRowIndex()][start.getColumnIndex()]='S';
-                for (int i = 0; i < depth; i++) {
-                    for (int j = 0; j < row; j++) {
 
-                        System.out.println(Arrays.toString(charArr[i][j]));}
+    public void print() {
+        System.out.print("{");
+        for (int d = 0; d < depth; d++) {
+            for (int r = 0; r < row; r++) {
+                System.out.print("{ ");
+                for (int c = 0; c < col; c++) {
+                    if (d == start.getDepthIndex() && r == start.getRowIndex() && c == start.getColumnIndex()) // if the position is the start - mark with S
+                        System.out.print("S ");
+                    else {
+                        if (d == exit.getDepthIndex() && r == exit.getRowIndex() && c == exit.getColumnIndex()) // if the position is the goal - mark with E
+                            System.out.print("E ");
+                        else
+                            System.out.print(maze[d][r][c] + " ");
+                    }
+                }
+                if (r == row - 1 && d!=depth-1) {
+                    System.out.println("},");
+                }
+                else if (r == row - 1 && d == depth - 1) {
+                    System.out.print("}");}
+                else {
+                    System.out.println("}");
+                }
             }
-        }}
+        }
+            System.out.println("}");}
+
+
 
        private Position3D chooseRandom() {
             Random R = new Random();
@@ -94,7 +103,7 @@ public class Maze3D {
             } else if (frame == 3){
                 randomP.setDepidx(depth-1);
                 randomP.setRowidx(R.nextInt(row));
-                randomP.setColidx(col);}
+                randomP.setColidx(R.nextInt(col));}
            //פאה ימנית
             else if (frame == 4){
                 randomP.setDepidx(R.nextInt(depth));
@@ -125,5 +134,11 @@ public class Maze3D {
     public int getval(int i, int j,int k) {
             return maze[i][j][k];
         }
+
+
+    public void setStart(Position3D start) {
+        this.start = start;
     }
+    public int[][][] getMap(){return maze;}
+}
 

@@ -6,6 +6,10 @@ import java.util.Random;
 
 public class MyMazeGenerator extends AmazeGenerator {
    public Maze generate(int r,int c){
+       if(r<=0 || c<=0){
+           return new EmptyMazeGenerator().generate(r,c);
+       }
+
         //initiate new maze and sel all it's cells with 1 as walls.
         Maze maze = new Maze(r, c);
         maze.setmaze(all1maze(r,c));
@@ -78,6 +82,7 @@ public class MyMazeGenerator extends AmazeGenerator {
         }
 
     }
+
 
 
 }
