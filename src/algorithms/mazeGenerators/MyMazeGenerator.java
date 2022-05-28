@@ -5,6 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 public class MyMazeGenerator extends AmazeGenerator {
+    /**
+     *
+     * @param r - row
+     * @param c - column
+     * @return maze with walls and cells
+     * generate the maze using prim algorithm.
+     */
    public Maze generate(int r,int c){
        if(r<=0 || c<=0){
            return new EmptyMazeGenerator().generate(r,c);

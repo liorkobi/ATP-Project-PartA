@@ -1,12 +1,15 @@
 package algorithms.mazeGenerators;
 
 import java.util.Random;
-//t
+
+/**
+ * generates maze using Random to ruffle Walls and cells.
+ */
 public class SimpleMazeGenerator extends AmazeGenerator {
     @Override
     public Maze generate(int r , int c) {
         if(r<=0 || c<=0){
-            return new EmptyMazeGenerator().generate(r,c);
+            r=3; c=3;
         }
 
         Maze maze=new Maze(r,c);

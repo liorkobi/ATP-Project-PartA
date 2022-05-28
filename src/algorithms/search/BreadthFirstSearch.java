@@ -7,6 +7,10 @@ public class BreadthFirstSearch extends ASearchingAlgorithms{
         this.VQ = new LinkedList<AState>();
     }
 
+    /**
+     *
+     * implementation of BFS algorithm using ordinary Queue
+     */
     public ISearchable BFS(ISearchable problemC) {
     if(problemC.getStart()==null){return null;}
         ISearchable problem=problemC.clone();
@@ -24,7 +28,6 @@ public class BreadthFirstSearch extends ASearchingAlgorithms{
                         v.setColor(AState.color.gray);
                         v.setParent(u);
                         VQ.add(v);
-//                        if (v.equals(problem.getGoal())){counter++;return problem;}}
 
                     }
                 }
@@ -37,7 +40,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithms{
 public int getNumberOfNodesEvaluated(){
         return counter;}
 
-
+//calls the BFS algorith , find the solution path and return it
     @Override
     public Solution solve(ISearchable domain){
         if(domain.getStart()==null){return null;}

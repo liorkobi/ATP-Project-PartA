@@ -1,12 +1,15 @@
 package algorithms.maze3D;
-
-import algorithms.mazeGenerators.Position;
-
 public class Position3D {
         int rowidx;
         int colidx;
         int depidx;
 
+    /**
+     *
+     * @param depidx - depth
+     * @param rowidx - row
+     * @param colidx - column
+     */
         public Position3D(int depidx,int rowidx, int colidx) {
             this.rowidx = rowidx;
             this.colidx = colidx;
@@ -40,7 +43,6 @@ public class Position3D {
 
 
 
-        //אם יהיה לנו זמן לדדרוס את שווה שווה ולשנות בגט גאול פוסישן
         @Override
         public boolean equals(Object P) {
 

@@ -1,9 +1,6 @@
 package algorithms.maze3D;
-
-import algorithms.mazeGenerators.Position;
-
-import java.util.Arrays;
 import java.util.Random;
+
 
 public class Maze3D {
         int row;
@@ -13,8 +10,18 @@ public class Maze3D {
         Position3D start;
         Position3D exit;
 
-
+    /**
+     *constractor arguments
+     * @param d - assign to depth
+     * @param r - assign to rows
+     * @param c - assign to columns
+     *            assign maze filed to int array with size of [depth][row][col]
+     *            initialize start and exit positions with null
+     */
         public Maze3D(int d, int r, int c) {
+            if(d<=0 || r<=0 || c<=0){
+                d=3; r=3; c=3;
+            }
             depth=d;
             row = r;
             col = c;
@@ -32,7 +39,12 @@ public class Maze3D {
             return start;
         }
 
-        public Position3D getGoalPosition() {
+    /**
+     * check that maze doesn't have goal position yet
+     * raffle one as long as is different from the maze start position
+     * @return goal position
+     */
+    public Position3D getGoalPosition() {
             if (exit == null && depth>0 && row > 0 && col > 0) {
                 boolean bool = true;
                 Position3D exitP = chooseRandom();
@@ -78,38 +90,41 @@ public class Maze3D {
             System.out.println("}");}
 
 
-
+    /**
+     * frame - randomize number between 1 and 6 , these represent the maze boundaries
+     * @return the chosen position
+     */
        private Position3D chooseRandom() {
             Random R = new Random();
             int frame = R.nextInt(6);
             Position3D randomP = new Position3D(R.nextInt(row), R.nextInt(col),R.nextInt(depth));
-            //פאה עליונה
+            //upper side
             if (frame == 0) {
                 randomP.setRowidx(0);
                 randomP.setColidx(R.nextInt(col));
                 randomP.setDepidx(R.nextInt(depth));
-                //פאה תחתונה
+                //lower side
             } else if (frame == 1) {
                 randomP.setRowidx(row-1);
                 randomP.setColidx(R.nextInt(col));
                 randomP.setDepidx(R.nextInt(depth));
-                //פאה קדמית
+                //front side
             } else if (frame == 2) {
                 randomP.setDepidx(0);
                 randomP.setColidx(R.nextInt(col));
                 randomP.setRowidx(R.nextInt(row));
 
-                //פאה אחורית
+                //back side
             } else if (frame == 3){
                 randomP.setDepidx(depth-1);
                 randomP.setRowidx(R.nextInt(row));
                 randomP.setColidx(R.nextInt(col));}
-           //פאה ימנית
+           //right side
             else if (frame == 4){
                 randomP.setDepidx(R.nextInt(depth));
                 randomP.setRowidx(R.nextInt(row));
                 randomP.setColidx(col-1);
-                //פאה שמאלית
+                //left side
             }else{
                 randomP.setDepidx(R.nextInt(depth));
                 randomP.setRowidx(R.nextInt(row));

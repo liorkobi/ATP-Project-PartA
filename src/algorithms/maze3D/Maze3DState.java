@@ -1,28 +1,24 @@
 package algorithms.maze3D;
-
-import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
-import algorithms.search.MazeState;
+
 
 public class Maze3DState extends AState {
 
     Position3D p;
 
 
+    /**
+     * Maze state is state of the maze
+     * @param d - depth
+     * @param r - row
+     * @param c - column
+     *          create new positin with these parameters
+     *          initialize the state color as white
+     */
     public Maze3DState(int d,int r, int c) {
         Color = color.white;
         this.p = new Position3D(d,r,c);
     }
-
-    //AState's status for the searching algorithms
-//    public color getColor() {
-//        return Color;
-//    }
-//
-//    public void setColor(color color) {
-//        Color = color;
-//    }
-
 
     public String toString() {
         return p.toString();

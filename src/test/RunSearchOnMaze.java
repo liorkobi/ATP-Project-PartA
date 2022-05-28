@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(100, 100);
+        Maze maze = mg.generate(10, 10);
 //        int[][] n;
 //           n= new int[][]{
 //                   {1,1,1,1,1,1,1,1,1,1},

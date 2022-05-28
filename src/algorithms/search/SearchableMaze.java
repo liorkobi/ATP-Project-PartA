@@ -11,7 +11,11 @@ public class SearchableMaze implements ISearchable,Cloneable{
     MazeState Start;
     MazeState Goal;
 
-
+    /**
+     * Constractor
+     * @param maze - to adapt
+     *             V2D - 2D array of MazeStates.
+     */
     public SearchableMaze(Maze maze) {
         Start=null;
         Goal=null;
@@ -26,6 +30,7 @@ public class SearchableMaze implements ISearchable,Cloneable{
 
 
     }
+    //copy constractor
 public SearchableMaze(SearchableMaze S){
         Start=S.Start;
         Goal=S.Goal;
@@ -65,6 +70,10 @@ public SearchableMaze(SearchableMaze S){
         return v.p.getRowIndex() - 1 >= 0 && m.getval(v.p.getRowIndex() - 1, v.p.getColumnIndex()) == 0;
     }
 
+
+    /**
+     * the following "Check..." methods verify that the nodes are within the maze boundaries
+     */
     //down
     private boolean checkDown(MazeState v, Maze m){
             if(v==null){return false;}

@@ -1,20 +1,23 @@
 package algorithms.maze3D;
-
-import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
 import algorithms.search.ISearchable;
-import algorithms.search.MazeState;
-import algorithms.search.SearchableMaze;
-
 import java.util.ArrayList;
 
+
+/**
+ * adapt maze to a searchable object
+ */
 public class SearchableMaze3D implements ISearchable,Cloneable {
     Maze3D m;
     Maze3DState[][][] V3D;
     Maze3DState Start;
     Maze3DState Goal;
 
-
+    /**
+     * Constractor
+     * @param maze - to adapt
+     *             V3D - 3D array of MazeStates.
+     */
     public SearchableMaze3D(Maze3D maze) {
         V3D = new Maze3DState[maze.getDepth()][maze.getRow()][maze.getCol()];
         Start=null;
@@ -26,14 +29,12 @@ public class SearchableMaze3D implements ISearchable,Cloneable {
 
     }
     //copy constructor
-
     public SearchableMaze3D(SearchableMaze3D S){
-        V3D=S.V3D;
         Start=S.Start;
         Goal=S.Goal;
         m=S.m;
+        V3D=new Maze3DState[m.getDepth()][m.getRow()][m.getCol()];;
         buildVertexList(m);
-
     }
     private void buildVertexList(Maze3D maze){
         for(int k=0;k<maze.getDepth();k++){
@@ -58,7 +59,9 @@ public class SearchableMaze3D implements ISearchable,Cloneable {
         return Goal;
     }
 
-
+    /**
+     * the following "Check..." methods verify that the nodes are within the maze boundaries
+     */
     //up
     private boolean checkUp(Maze3DState v, Maze3D m) {
         if(v==null){return false;}

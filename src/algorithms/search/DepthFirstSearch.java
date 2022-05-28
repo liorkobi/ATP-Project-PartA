@@ -9,6 +9,10 @@ public class DepthFirstSearch extends ASearchingAlgorithms{
          stack = new Stack<>();
     }
 
+    /**
+     *implementation of DFS algorithm using stack - in order to preserve the right order of evaluated nodes
+     * we push them to the stack reversely.
+     */
     public ISearchable DFS(ISearchable problemC){
         if(problemC.getStart()==null){return null;}
 
@@ -44,6 +48,7 @@ public class DepthFirstSearch extends ASearchingAlgorithms{
         return problem;}
 
 
+//calls the DFS algorith , find the solution path and return it
 
     @Override
     public Solution solve(ISearchable domain) {

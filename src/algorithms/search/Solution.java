@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+/**
+ * final result of the solution.
+ */
 public class Solution {
     ArrayList<AState> sol;
 

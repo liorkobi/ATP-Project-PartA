@@ -3,7 +3,10 @@ package algorithms.mazeGenerators;
 public class Position {
     int rowidx;
     int colidx;
-
+    /**
+     * @param rowidx - row
+     * @param colidx - column
+     */
     public Position(int rowidx, int colidx) {
         this.rowidx = rowidx;
         this.colidx = colidx;

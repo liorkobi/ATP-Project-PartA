@@ -1,15 +1,18 @@
 package algorithms.maze3D;
-
-import algorithms.mazeGenerators.EmptyMazeGenerator;
-import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.Position;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MyMaze3DGenerator extends AMaze3DGenerator{
 
+    /**
+     *
+     * @param d - depth
+     * @param r - row
+     * @param c - column
+     * @return maze with walls and cells
+     * generate the maze using binary tree algorithm.
+     */
    public Maze3D generate(int d, int r, int c){
        if(d<=0 ||r<=0 ||c<=0){d=3;c=3;r=3;}
 

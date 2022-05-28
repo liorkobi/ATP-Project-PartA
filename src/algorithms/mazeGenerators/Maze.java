@@ -9,7 +9,13 @@ public class Maze {
     int[][] maze;
     Position start;
     Position exit;
-
+    /**
+     *constractor arguments
+     * @param r - assign to rows
+     * @param c - assign to columns
+     *            assign maze filed to int array with size of [row][col]
+     *            initialize start and exit positions with null
+     */
     public Maze(int r, int c) {
         if(r<0 || c<0){
             r=0;
@@ -33,7 +39,11 @@ public class Maze {
         }
         return start;
     }
-
+    /**
+     * check that maze doesn't have goal position yet
+     * raffle one as long as is different from the maze start position
+     * @return goal position
+     */
     public Position getGoalPosition() {
         if (exit == null && row > 0 && col > 0) {
             boolean bool = true;
@@ -74,21 +84,31 @@ public class Maze {
             }
         System.out.println("}");
     }
-
+    /**
+     * frame - randomize number between 1 and 4 , these represent the maze boundaries
+     * @return the chosen position
+     */
    private Position chooseRandom() {
         Random R = new Random();
         int frame = R.nextInt(4);
         Position randomP = new Position(R.nextInt(row), R.nextInt(col));
+        //first row - any column
         if (frame == 0) {
             randomP.setRowidx(0);
             randomP.setColidx(R.nextInt(col));
-        } else if (frame == 1) {
+        }
+        //last row - any column
+        else if (frame == 1) {
             randomP.setRowidx(row-1);
             randomP.setColidx(R.nextInt(col));
-        } else if (frame == 2) {
+        }
+        //first column - any row
+        else if (frame == 2) {
             randomP.setRowidx(R.nextInt(row));
             randomP.setColidx(0);
-        } else {
+        }
+        //last column - any row
+        else {
             randomP.setRowidx(R.nextInt(row));
             randomP.setColidx(col-1);
         }
@@ -110,14 +130,5 @@ public class Maze {
         else {return -1;}
     }
 
-    //delete before submission!!!
 
-
-    public void setStart(Position start) {
-        this.start = start;
-    }
-
-    public void setExit(Position exit) {
-        this.exit = exit;
-    }
 }

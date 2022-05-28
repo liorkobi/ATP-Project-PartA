@@ -1,10 +1,9 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
-
-import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.zip.Inflater;
+/**
+ * state of a searchable problem
+ * color represents the status of the state during the solving process.
+ */
 public abstract class AState {
 
      public enum color {white, gray, black}

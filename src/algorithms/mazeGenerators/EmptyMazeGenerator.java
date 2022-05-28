@@ -1,5 +1,8 @@
 package algorithms.mazeGenerators;
 
+/**
+ * generats maze in size 0.
+ */
 public class EmptyMazeGenerator extends AmazeGenerator{
     @Override
     public Maze generate(int r , int c) {

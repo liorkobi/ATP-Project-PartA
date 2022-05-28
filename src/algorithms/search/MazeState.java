@@ -8,21 +8,17 @@ public class MazeState extends AState {
 
     Position p;
 
-
+    /**
+     * Maze state is state of the maze
+     * @param r - row
+     * @param c - column
+     *          create new positin with these parameters
+     *          initialize the state color as white
+     */
     public MazeState(int r, int c) {
         Color = color.white;
         this.p = new Position(r,c);
     }
-
-    //AState's status for the searching algorithms
-//    public color getColor() {
-//        return Color;
-//    }
-
-//    public void setColor(color color) {
-//        Color = color;
-//    }
-
 
     public String toString() {
         return p.toString();
