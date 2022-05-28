@@ -13,21 +13,26 @@ public class SearchableMaze implements ISearchable,Cloneable{
 
 
     public SearchableMaze(Maze maze) {
-        V2D = new MazeState[maze.getRow()][maze.getCol()];
         Start=null;
         Goal=null;
-        m=maze;
-        buildVertexList(m);
+        if(maze.getCol()>0 && maze.getRow()>0){
+             m=maze;
+            V2D = new MazeState[maze.getRow()][maze.getCol()];
+            buildVertexList(m);}
+        else {
+            m=null;
+            V2D = null;}
 
 
 
     }
 public SearchableMaze(SearchableMaze S){
-        V2D=S.V2D;
         Start=S.Start;
         Goal=S.Goal;
         m=S.m;
+        V2D = new MazeState[m.getRow()][m.getCol()];
         buildVertexList(m);
+
 
 }
     private void buildVertexList(Maze maze){
@@ -101,47 +106,55 @@ public SearchableMaze(SearchableMaze S){
         //up
         if (checkUp(v, m)) {
             Adj.add(V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex()]);
+            V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex()].setCost(10+v.getCost());
+
         }
         //UR diagonal
         if (checkRight(v, m) || checkUp(v, m)) {
             if (checkUR(v,m)) {
                 Adj.add(V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() + 1]);
-                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() + 1].setCost(15);
+                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() + 1].setCost(15+v.getCost());
             }
         }
 
         //right
         if (checkRight(v, m)) {
             Adj.add(V2D[v.p.getRowIndex()][v.p.getColumnIndex() + 1]);
+            V2D[v.p.getRowIndex()][v.p.getColumnIndex()+1].setCost(10+v.getCost());
+
         }
         //DR diagonal
         if (checkRight(v, m) || checkDown(v, m)) {
             if (checkDR(v,m)) {
                 Adj.add(V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() + 1]);
-                V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() + 1].setCost(15);
+                V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() + 1].setCost(15+v.getCost());
             }
         }
 
         //down
         if (checkDown(v, m)) {
             Adj.add(V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex()]);
+            V2D[v.p.getRowIndex() +1][v.p.getColumnIndex()].setCost(10+v.getCost());
+
         }
         //DL diagonal
         if (checkDown(v, m) || checkLeft(v, m)) {
             if (checkDL(v,m)) {
                 Adj.add(V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() - 1]);
-                V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() - 1].setCost(15);
+                V2D[v.p.getRowIndex() + 1][v.p.getColumnIndex() - 1].setCost(15+v.getCost());
             }
         }
         //left
         if (checkLeft(v, m)) {
             Adj.add(V2D[v.p.getRowIndex()][v.p.getColumnIndex() - 1]);
+            V2D[v.p.getRowIndex()][v.p.getColumnIndex()-1].setCost(10+v.getCost());
+
         }
         //UL diagonal
         if (checkLeft(v, m) || (checkUp(v, m))){
             if (checkUL(v,m)) {
                 Adj.add(V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1]);
-                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1].setCost(15);
+                V2D[v.p.getRowIndex() - 1][v.p.getColumnIndex() - 1].setCost(15+v.getCost());
             }}
 
 

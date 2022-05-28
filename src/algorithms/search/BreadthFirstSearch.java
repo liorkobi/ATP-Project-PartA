@@ -8,13 +8,15 @@ public class BreadthFirstSearch extends ASearchingAlgorithms{
     }
 
     public ISearchable BFS(ISearchable problemC) {
-
+    if(problemC.getStart()==null){return null;}
         ISearchable problem=problemC.clone();
         AState Start=problem.getStart();
         Start.setColor(AState.color.gray);
         VQ.add(Start);
         while (!VQ.isEmpty()){
             AState u=VQ.poll();
+            if (u.equals(problem.getGoal())){u.setColor(AState.color.gray);return problem;}
+            counter++;
             ArrayList<AState> uAdj=problem.getAllPossibleStates(u);
                 for (int i = 0; i < uAdj.size(); i++) {
                     AState v = uAdj.get(i);
@@ -22,11 +24,11 @@ public class BreadthFirstSearch extends ASearchingAlgorithms{
                         v.setColor(AState.color.gray);
                         v.setParent(u);
                         VQ.add(v);
-                        counter++;
+//                        if (v.equals(problem.getGoal())){counter++;return problem;}}
+
                     }
                 }
             u.setColor(AState.color.black);
-            if (u.equals(problem.getGoal())){break;}
         }
         return problem;
     }
@@ -38,6 +40,7 @@ public int getNumberOfNodesEvaluated(){
 
     @Override
     public Solution solve(ISearchable domain){
+        if(domain.getStart()==null){return null;}
         ISearchable p=BFS(domain);
         Solution S=new Solution();
         TheShortestPath(p,S,p.getGoal());

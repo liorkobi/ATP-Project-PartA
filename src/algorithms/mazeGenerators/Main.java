@@ -1,6 +1,4 @@
-package algorithms.mazeGenerators;
-
-/**
+package algorithms.mazeGenerators; /**
  * Created by Aviad on 5/10/2017.
  */
 
@@ -21,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         appendToResultsFile("Test started!");
         Tests_GenerateMaze();
-       // Tests_SearchOnMaze();
+        Tests_SearchOnMaze();
         appendToResultsFile("Test finished!");
     }
 
@@ -31,7 +29,7 @@ public class Main {
 
     private static int[][] getRowsColumnsCombinations() {
         int[][] rowsColumnsCombinations = {
-                {1000, 1000}
+                {5, 5}
         };
         return rowsColumnsCombinations;
     }
@@ -53,12 +51,11 @@ public class Main {
         boolean testStatus = true;
         try {
             // prints the time it takes the algorithm to run
-            long l=mazeGenerator.measureAlgorithmTimeMillis(rows, columns);
-            System.out.println(l);
+            mazeGenerator.measureAlgorithmTimeMillis(rows, columns);
             // generate another maze
             Maze maze = mazeGenerator.generate(rows, columns);
             // prints the maze
-            //maze.print();
+            maze.print();
 
             // get the maze entrance
             Position startPosition = maze.getStartPosition();
@@ -92,9 +89,9 @@ public class Main {
                 columns = rowsColumnsCombinations[i][1];
 
                 Maze maze = mg.generate(rows, columns);
-                //SearchableMaze searchableMaze = new SearchableMaze(maze);
+                SearchableMaze searchableMaze = new SearchableMaze(maze);
 
-                //testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
+                testPassed = solveProblem(searchableMaze, new BreadthFirstSearch(), rows, columns);
 
             } catch (Exception e) {
                 appendToResultsFile(String.format("Fatal Error when converting Maze to SearchableMaze (%s,%s): %s", rows, columns, e.getMessage()));
@@ -118,7 +115,6 @@ public class Main {
     }
     //</editor-fold>
 
-
     public static void appendToResultsFile(String text) {
         try (java.io.FileWriter fw = new java.io.FileWriter(m_resultsFileName, true)) {
             fw.write(text + "\r\n");
@@ -126,6 +122,4 @@ public class Main {
             System.out.println(String.format("Error appending text to file: %s", m_resultsFileName));
         }
     }
-
-
 }

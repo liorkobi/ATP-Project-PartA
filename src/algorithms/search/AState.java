@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.zip.Inflater;
 public abstract class AState {
 
-    public enum color {white, gray, black}
+     public enum color {white, gray, black}
 
-    color Color;
-    AState Parent;
-    int cost;
+    protected  color Color;
+    protected AState Parent;
+    protected  int cost;
 
     public AState() {
         Parent = null;
@@ -46,8 +46,5 @@ public abstract class AState {
             Parent = parent;
     }
 
-    public String toString() {
-        return String.format("MY color : %s", this.Color);
-    }
 }
 

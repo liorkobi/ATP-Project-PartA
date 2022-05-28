@@ -10,6 +10,6 @@ public interface ISearchable {
 
      ArrayList<AState> getAllPossibleStates(AState m) ;
 
-     SearchableMaze clone() ;
+     ISearchable clone() ;
 
     }

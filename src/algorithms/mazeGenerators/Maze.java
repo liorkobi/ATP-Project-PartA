@@ -52,18 +52,27 @@ public class Maze {
     }
 
     public void print(){
-        if(start!=null && exit!=null) {
-            char[][] charArr = new char[row][col];
-            for (int i = 0; i < row; i++) {
-                for (int j = 0; j < col; j++) {
-                    charArr[i][j] = (char) ('0' + maze[i][j]);
+        System.out.print("{");
+            for(int r = 0; r < row; r++) {
+                System.out.print("{ ");
+                for (int c = 0; c < col; c++) {
+                    if (r == start.getRowIndex() && c == start.getColumnIndex()) // if the position is the start - mark with S
+                        System.out.print("S ");
+                    else {
+                        if (r == exit.getRowIndex() && c == exit.getColumnIndex()) // if the position is the goal - mark with E
+                            System.out.print("E ");
+                        else
+                            System.out.print(maze[r][c] + " ");
+                    }
                 }
+                if (r + 1 == row) {
+                    System.out.print("}");
+                } else {
+                    System.out.println("},");
+                }
+
             }
-            charArr[exit.getRowIndex()][exit.getColumnIndex()]='E';
-            charArr[start.getRowIndex()][start.getColumnIndex()]='S';
-            for (int i = 0; i < row; i++) {
-                System.out.println(Arrays.toString(charArr[i]));}
-        }
+        System.out.println("}");
     }
 
    private Position chooseRandom() {
