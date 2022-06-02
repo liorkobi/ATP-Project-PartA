@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * generates maze using Random to ruffle Walls and cells.
  */
-public class SimpleMazeGenerator extends AMazeGenerator {
+public class SimpleMazeGenerator extends AmazeGenerator {
     @Override
     public Maze generate(int r , int c) {
         if(r<=0 || c<=0){

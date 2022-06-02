@@ -2,7 +2,7 @@ package algorithms.search;
 
 import java.util.*;
 
-public class BreadthFirstSearch extends ASearchingAlgorithm {
+public class BreadthFirstSearch extends ASearchingAlgorithms{
     public BreadthFirstSearch() {
         this.VQ = new LinkedList<AState>();
     }

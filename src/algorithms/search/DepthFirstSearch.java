@@ -2,7 +2,7 @@ package algorithms.search;
 
 import java.util.*;
 
-public class DepthFirstSearch extends ASearchingAlgorithm {
+public class DepthFirstSearch extends ASearchingAlgorithms{
     Stack<AState> stack;
 
     public DepthFirstSearch(){

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class RunSearchOnMaze {
     public static void main(String[] args) {
         IMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(5, 5);
+        Maze maze = mg.generate(100, 100);
 
         SearchableMaze searchableMaze = new SearchableMaze(maze);
 
@@ -27,10 +27,10 @@ public class RunSearchOnMaze {
         Position startPosition = maze.getStartPosition();
 
 // print the start position
-      System.out.println(String.format("Start Position: %s", startPosition)); // format "{row,column}"
-//
-//// prints the maze exit position
-     System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
+        System.out.println(String.format("Start Position: %s", startPosition)); // format "{row,column}"
+
+// prints the maze exit position
+        System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
     }
 
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm searcher) {

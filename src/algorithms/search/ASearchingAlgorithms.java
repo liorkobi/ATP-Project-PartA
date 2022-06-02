@@ -6,11 +6,11 @@ import java.util.*;
  * abstract class  of searching algorithms
  * all  algorithms find the solution path with " TheShortestPath()"
  */
-public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
+public abstract class ASearchingAlgorithms implements ISearchingAlgorithm {
     protected Queue<AState> VQ;
     protected int counter;
 
-    public ASearchingAlgorithm() {
+    public ASearchingAlgorithms() {
         this.counter = 0;
     }
 
