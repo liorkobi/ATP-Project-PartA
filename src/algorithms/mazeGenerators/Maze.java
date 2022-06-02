@@ -94,9 +94,8 @@ public class Maze {
 
         }
         exit = new Position(exitR, exitC);
-
+i++;
         maze=new int[row][col];
-//        int n = i;
         for (int k = 0; k < row; k++) {
             for (int h = 0; h < col; h++) {
                 maze[k][h] = (b[i]&0xFF);
@@ -213,150 +212,151 @@ public class Maze {
                 return -1;
             }
         }
-
-        private int rowSize () {
-            int R = row / 255;
-            if (R == 0) R = 2;
-            else if (R % 255 != 0) {
-                R += 2;
-            }
-            return R;
+    private int rowSize () {
+        int R = row / 255;
+        if (R == 0) R = 2;
+        else if (R % 255 != 0) {
+            R += 2;
         }
-        private int colSize () {
-            int C = col / 255;
-            if (C == 0) C = 2;
-            else if (C % 255 != 0) {
-                C += 2;
-            }
-            return C;
+        return R;
+    }
+    private int colSize () {
+        int C = col / 255;
+        if (C == 0) C = 2;
+        else if (C % 255 != 0) {
+            C += 2;
         }
-        private int startRowSize () {
-            int SRowIdx = start.rowidx / 255;
-            if (SRowIdx == 0) SRowIdx = 2;
-            else if (SRowIdx % 255 != 0) {
-                SRowIdx += 2;
-            }
-            return SRowIdx;
+        return C;
+    }
+    private int startRowSize () {
+        int SRowIdx = start.rowidx / 255;
+        if (SRowIdx == 0) SRowIdx = 2;
+        else if (SRowIdx % 255 != 0) {
+            SRowIdx += 2;
         }
+        return SRowIdx;
+    }
 
-        private int startColSize () {
-            int SColIdx = start.colidx / 255;
-            if (SColIdx == 0) SColIdx = 2;
-            else if (start.colidx % 255 != 0) {
-                SColIdx += 2;
-            } else if (start.colidx % 255 == 0) {
-                SColIdx++;
-            }
-            return SColIdx;
+    private int startColSize () {
+        int SColIdx = start.colidx / 255;
+        if (SColIdx == 0) SColIdx = 2;
+        else if (start.colidx % 255 != 0) {
+            SColIdx += 2;
+        } else if (start.colidx % 255 == 0) {
+            SColIdx++;
         }
+        return SColIdx;
+    }
 
-        private int exitRowSize () {
+    private int exitRowSize () {
 
-            int ERowIdx = exit.rowidx / 255;
-            if (ERowIdx == 0) ERowIdx = 2;
-            else if (ERowIdx % 255 != 0) {
-                ERowIdx += 2;
-            }
-            return ERowIdx;
+        int ERowIdx = exit.rowidx / 255;
+        if (ERowIdx == 0) ERowIdx = 2;
+        else if (ERowIdx % 255 != 0) {
+            ERowIdx += 2;
         }
+        return ERowIdx;
+    }
 
-        private int exitColSizE () {
-            int EColIdx = exit.colidx / 255;
-            if (EColIdx == 0) EColIdx = 2;
-            else if (EColIdx % 255 != 0) {
-                EColIdx += 2;
-            }
-            return EColIdx;
+    private int exitColSizE () {
+        int EColIdx = exit.colidx / 255;
+        if (EColIdx == 0) EColIdx = 2;
+        else if (EColIdx % 255 != 0) {
+            EColIdx += 2;
         }
+        return EColIdx;
+    }
 
 
-        public byte[] toByteArray () {
+    public byte[] toByteArray () {
 //check needed size for each parameter in the byte array
-            int R = rowSize();
-            int C = colSize();
-            int SColIdx = startColSize();
-            int SRowIdx = startRowSize();
-            int EColIdx = exitColSizE();
-            int ERowIdx = exitRowSize();
+        int R = rowSize();
+        int C = colSize();
+        int SColIdx = startColSize();
+        int SRowIdx = startRowSize();
+        int EColIdx = exitColSizE();
+        int ERowIdx = exitRowSize();
 
-            int size = R + C + SColIdx + SRowIdx + EColIdx + ERowIdx + (row * col);
+        int size = R + C + SColIdx + SRowIdx + EColIdx + ERowIdx + (row * col)+1;
 
-            byte[] Barr = new byte[size];
-            //insert num of rows
-            int temp1 = row;
-            int i;
-            for (i = 0; i < R; i++) {
-                if (temp1 < 255) {
-                    Barr[i] = (byte) temp1;
-                    temp1 -= temp1;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp1 -= 255;
-                }
+        byte[] Barr = new byte[size];
+        //insert num of rows
+        int temp1 = row;
+        int i;
+        for (i = 0; i < R; i++) {
+            if (temp1 < 255) {
+                Barr[i] = (byte) temp1;
+                temp1 -= temp1;
+            } else {
+                Barr[i] = (byte) 255;
+                temp1 -= 255;
             }
-            //insert num of cols
-            int temp2 = col;
-            for (i = i; i < C + R; i++) {
-                if (temp2 < 255) {
-                    Barr[i] = (byte) temp2;
-                    temp2 -= temp2;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp2 -= 255;
-                }
-            }
-            //insert maze start row index
-            int temp3 = start.rowidx;
-            for (i = i; i < SRowIdx + R + C; i++) {
-                if (temp3 < 255) {
-                    Barr[i] = (byte) temp3;
-                    temp3 -= temp3;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp3 -= 255;
-                }
-            }
-            //insert maze start col index
-            int temp4 = start.colidx;
-            for (i = i; i < SColIdx + SRowIdx + R + C; i++) {
-                if (temp4 < 255) {
-                    Barr[i] = (byte) temp4;
-                    temp4 -= temp4;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp4 -= 255;
-                }
-            }
-            //insert maze exit row index
-            int temp5 = exit.rowidx;
-            for (i = i; i < ERowIdx + SColIdx + SRowIdx + R + C; i++) {
-                if (temp5 < 255) {
-                    Barr[i] = (byte) temp5;
-                    temp5 -= temp5;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp5 -= 255;
-                }
-            }
-            //insert maze exit row index
-            int temp = exit.colidx;
-            for (i = i; i < EColIdx + ERowIdx + SColIdx + SRowIdx + R + C; i++) {
-                if (temp < 255) {
-                    Barr[i] = (byte) temp;
-                    temp -= temp;
-                } else {
-                    Barr[i] = (byte) 255;
-                    temp -= 255;
-                }
-            }
-            for (int j = 0; j < row; j++) {
-                for (int k = 0; k < col; k++) {
-                    Barr[i] = (byte) maze[j][k];
-                    i++;
-                }
-            }
-            for (int g = 0; g < size; g++)
-                System.out.println(Barr[g]);
-            return Barr;
         }
+        //insert num of cols
+        int temp2 = col;
+        for (i = i; i < C + R; i++) {
+            if (temp2 < 255) {
+                Barr[i] = (byte) temp2;
+                temp2 -= temp2;
+            } else {
+                Barr[i] = (byte) 255;
+                temp2 -= 255;
+            }
+        }
+        //insert maze start row index
+        int temp3 = start.rowidx;
+        for (i = i; i < SRowIdx + R + C; i++) {
+            if (temp3 < 255) {
+                Barr[i] = (byte) temp3;
+                temp3 -= temp3;
+            } else {
+                Barr[i] = (byte) 255;
+                temp3 -= 255;
+            }
+        }
+        //insert maze start col index
+        int temp4 = start.colidx;
+        for (i = i; i < SColIdx + SRowIdx + R + C; i++) {
+            if (temp4 < 255) {
+                Barr[i] = (byte) temp4;
+                temp4 -= temp4;
+            } else {
+                Barr[i] = (byte) 255;
+                temp4 -= 255;
+            }
+        }
+        //insert maze exit row index
+        int temp5 = exit.rowidx;
+        for (i = i; i < ERowIdx + SColIdx + SRowIdx + R + C; i++) {
+            if (temp5 < 255) {
+                Barr[i] = (byte) temp5;
+                temp5 -= temp5;
+            } else {
+                Barr[i] = (byte) 255;
+                temp5 -= 255;
+            }
+        }
+        //insert maze exit row index
+        int temp = exit.colidx;
+        for (i = i; i < EColIdx + ERowIdx + SColIdx + SRowIdx + R + C; i++) {
+            if (temp < 255) {
+                Barr[i] = (byte) temp;
+                temp -= temp;
+            } else {
+                Barr[i] = (byte) 255;
+                temp -= 255;
+            }
+        }
+        //indicats the start of the maze representation
+        Barr[Barr.length-1]=(byte) i;
+        for (int j = 0; j < row; j++) {
+            for (int k = 0; k < col; k++) {
+                Barr[i] = (byte) maze[j][k];
+                i++;
+            }
+        }
+//            for (int g = 0; g < size; g++)
+//                System.out.println(Barr[g]);
+        return Barr;
+    }
     }

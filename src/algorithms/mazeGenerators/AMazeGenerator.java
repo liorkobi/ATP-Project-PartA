@@ -4,7 +4,7 @@ package algorithms.mazeGenerators;
  * All generators have same implementestion of "measureAlgorithmTimeMillis()"
  * "generate()" is implemented uniquely in each generator
  */
-public abstract class AmazeGenerator implements IMazeGenerator {
+public abstract class AMazeGenerator implements IMazeGenerator {
     /**
      *
      * @param r is number of maze's rows
