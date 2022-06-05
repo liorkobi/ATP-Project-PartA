@@ -1,5 +1,6 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,7 +8,7 @@ import java.util.Collections;
 /**
  * final result of the solution.
  */
-public class Solution {
+public class Solution implements Serializable {
     ArrayList<AState> sol;
 
     public Solution() {
