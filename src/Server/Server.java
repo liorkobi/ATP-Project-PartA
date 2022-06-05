@@ -77,7 +77,12 @@ public class Server {
         this.strategy = strategy;
     }
 
-    public void start(){
+    public void start() {
+        new Thread(() -> {
+            this.startInner();
+        }).start();
+    }
+    public void startInner(){
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);

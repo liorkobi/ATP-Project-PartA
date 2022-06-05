@@ -20,17 +20,29 @@ public class SimpleDecompressorInputStream extends InputStream {
     @Override
     public int read(byte[] Final) throws IOException {
         byte[] b = in.readAllBytes();
-        System.arraycopy(b, 0, Final, 0, (b[b.length - 1])-1);
+        int row=0;
+        int col=0;
+        int i=0;
+//        while (b[i] != 0) {
+//            row += (b[i] & 0xFF);
+//            i++;
+//        }
+//        while (b[i+1] != 0) {
+//            col += (b[i+1] & 0xFF);
+//        }
+//        byte[] Final = new byte[b[b.length-1]+row*col];
+
+        System.arraycopy(b, 0, Final, 0, (b[b.length - 1]));
         boolean bool=true;
         int pointer=b[b.length - 1];
         for(int j=b[b.length - 1];j<b.length-1;j++){
             if (bool){
             for(int k=0;k<b[j];k++){
-                Final[pointer]=0;pointer++;}
+                Final[k+pointer]=0;pointer++;}
                 bool=false;}
             else {
             for(int k=0;k<b[j];k++){
-                Final[pointer]=1;pointer++;
+                Final[k+pointer]=1;pointer++;
             }bool=true;}
 
         }
