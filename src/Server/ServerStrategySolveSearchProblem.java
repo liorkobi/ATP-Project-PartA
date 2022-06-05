@@ -7,8 +7,11 @@ import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.*;
 
 import java.io.*;
+import java.util.Hashtable;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
+    Hashtable<byte[],Solution> solTable;
+
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
 
@@ -25,13 +28,14 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
      try{
          fileObjectOut.writeObject(solution);
+         fileObjectOut.flush();
          fileObjectOut.close();
-         outStream.close();
+//         outStream.close();
      }
      catch (Exception e) {
          e.printStackTrace();}
 
-        toClient.writeObject(fileObjectOut);
+        toClient.writeObject(outStream);
         toClient.flush();
         fromClient.close();
         toClient.close();
