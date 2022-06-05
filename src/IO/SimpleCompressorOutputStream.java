@@ -18,6 +18,7 @@ public class SimpleCompressorOutputStream extends OutputStream {
 
     @Override
     public void write(byte[] b) throws IOException {
+
         int idx = b[b.length - 1];
         int counter = 0;
         byte[] temp = new byte[b.length];
@@ -28,7 +29,7 @@ public class SimpleCompressorOutputStream extends OutputStream {
             temp[idx] = (byte) 0;
             bool = false;
             idx += 1;}
-        for (int i = b[b.length - 1]; i < b.length; i++) {
+        for (int i = b[b.length - 1]; i < b.length-1; i++) {
             //current byte equals to previous byte
             if ((b[i] == 0 && bool) || (b[i] == 1 && !bool)) {
                 counter++;
@@ -66,16 +67,16 @@ public class SimpleCompressorOutputStream extends OutputStream {
                 bool = false;
             }
         }
-        temp[idx]=(byte)counter;
+        if(temp[idx]==0){
+        temp[idx]=(byte)counter;}
+        else {idx++;temp[idx]=(byte)counter;}
         out.write(removeBuffer(temp, idx));
     }
 
     private byte[] removeBuffer( byte[] b, int i){
-        byte[] Final = new byte[i];
-        System.arraycopy(b, 0, Final, 0, i - 1);
-        Final[i - 1] = b[b.length - 1];
-        for (int g = 0; g < i; g++)
-            System.out.println(Final[g]);
+        byte[] Final = new byte[i+2];
+        System.arraycopy(b, 0, Final, 0, i+1 );
+        Final[i+1] = b[b.length - 1];
         return Final;
     }
 

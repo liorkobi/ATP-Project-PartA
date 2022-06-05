@@ -21,7 +21,7 @@ public class RunCompressDecompressMaze {
 //                    FileOutputStream(mazeFileName));
             OutputStream out = new SimpleCompressorOutputStream(new
                     FileOutputStream(mazeFileName));
-            out.write(maze.toByteArray())
+            out.write(maze.toByteArray());
             ; out.flush();
             out.close();
         } catch (IOException e) {
@@ -34,6 +34,8 @@ public class RunCompressDecompressMaze {
                     FileInputStream(mazeFileName));
             savedMazeBytes = new byte[maze.toByteArray().length];
             in.read(savedMazeBytes);
+            System.out.println(Arrays.toString(savedMazeBytes));
+
             in.close();
         } catch (IOException e) {
             e.printStackTrace();

@@ -45,8 +45,10 @@ public class Maze {
         }
         while (b[i+1] != 0) {
             col += (b[i+1] & 0xFF);
-            i+=2;
+            i++;
         }
+        i++;
+
         int startR = 0;
         //what about 255??
         if (b[i+1] > -1) {
@@ -55,8 +57,10 @@ public class Maze {
         } else {
             while (b[i+1] != 0) {
                 startR += (b[i+1] & 0xFF);
-                i+=2;
+                i++;
             }
+            i++;
+
         }
         int startC = 0;
         if (b[i+1] > -1) {
@@ -66,8 +70,8 @@ public class Maze {
         } else {
             while (b[i+1] != 0) {
                 startC += (b[i+1] & 0xFF);
-                i+=2;
-            }
+                i++;
+            }  i++;
 
         }
         this.start = new Position(startR, startC);
@@ -78,8 +82,9 @@ public class Maze {
         } else {
             while (b[i+1] != 0) {
                 exitR += (b[i+1] & 0xFF);
-                i+=2;
-            }
+                i++;
+            }  i++;
+
         }
         int exitC = 0;
         if (b[i+1] > -1) {
@@ -89,12 +94,14 @@ public class Maze {
         } else {
             while (b[i+1] != 0) {
                 exitC += (b[i+1] & 0xFF);
-                i+=2;
+                i++;
             }
+            i++;
+
 
         }
         exit = new Position(exitR, exitC);
-i++;
+        i++;
         maze=new int[row][col];
         for (int k = 0; k < row; k++) {
             for (int h = 0; h < col; h++) {
@@ -357,6 +364,10 @@ i++;
         }
 //            for (int g = 0; g < size; g++)
 //                System.out.println(Barr[g]);
+//        System.out.println("from maze to byte arr");
+//
+//        System.out.println(Arrays.toString(Barr));
+
         return Barr;
     }
     }
