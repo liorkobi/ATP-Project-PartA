@@ -1,12 +1,13 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * abstract class  of searching algorithms
  * all  algorithms find the solution path with " TheShortestPath()"
  */
-public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
+public abstract class ASearchingAlgorithm implements ISearchingAlgorithm , Serializable {
     protected Queue<AState> VQ;
     protected int counter;
 

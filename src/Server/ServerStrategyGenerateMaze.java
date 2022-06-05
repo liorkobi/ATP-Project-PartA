@@ -9,6 +9,10 @@ import IO.SimpleCompressorOutputStream;
 import algorithms.mazeGenerators.MyMazeGenerator;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy{
+    public ServerStrategyGenerateMaze() {
+
+    }
+
     @Override
         public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
             try {
@@ -30,10 +34,10 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
 
                 toClient.writeObject(outPutStream.toByteArray());
                 toClient.flush();
+                fromClient.close();
                 toClient.close();
 
 
-                fromClient.close();
 
 
             } catch (Exception e1) {

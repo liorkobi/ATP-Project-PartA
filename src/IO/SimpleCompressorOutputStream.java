@@ -2,9 +2,10 @@ package IO;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class SimpleCompressorOutputStream extends OutputStream {
+public class SimpleCompressorOutputStream extends OutputStream implements Serializable {
     OutputStream out;
 
     public SimpleCompressorOutputStream(OutputStream out) {

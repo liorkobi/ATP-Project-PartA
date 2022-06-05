@@ -1,10 +1,13 @@
 package algorithms.mazeGenerators;
+
+import java.io.Serializable;
+
 /**
  * Abstract class of 2D generators
  * All generators have same implementestion of "measureAlgorithmTimeMillis()"
  * "generate()" is implemented uniquely in each generator
  */
-public abstract class AMazeGenerator implements IMazeGenerator {
+public abstract class AMazeGenerator implements IMazeGenerator , Serializable {
     /**
      *
      * @param r is number of maze's rows
