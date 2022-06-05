@@ -17,24 +17,40 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
         ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
 
         Maze maze = (Maze)fromClient.readObject();
-        ISearchingAlgorithm i = new BestFirstSearch();
-        ISearchable Smaze=new SearchableMaze(maze);
-        Solution solution = i.solve(Smaze);
-     OutputStream outStream = new FileOutputStream("Solution.ser");
-     ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
+        String fileP=System.getProperty("java.io.tmpdir")+maze.toString().hashCode()+"maze";
+        File file=new File(fileP);
 
-     try{
-         fileObjectOut.writeObject(solution);
-         fileObjectOut.close();
-         outStream.close();
+        OutputStream outStream = new FileOutputStream(fileP);
+        ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
+
+     if(!file.exists()) {
+         ISearchingAlgorithm i = new BestFirstSearch();
+         ISearchable Smaze = new SearchableMaze(maze);
+         Solution solution = i.solve(Smaze);
+         try {
+             fileObjectOut.writeObject(solution);
+             fileObjectOut.close();
+             outStream.close();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
      }
-     catch (Exception e) {
-         e.printStackTrace();}
+         toClient.writeObject(fileObjectOut);
+         toClient.flush();
+         fromClient.close();
+         toClient.close();
 
-        toClient.writeObject(fileObjectOut);
-        toClient.flush();
-        fromClient.close();
-        toClient.close();
+//     }else{
+//         OutputStream outStream = new FileOutputStream(fileP);
+//         ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
+//         toClient.writeObject(fileObjectOut);
+//         fileObjectOut.close();
+//         outStream.close();
+//         toClient.flush();
+//         fromClient.close();
+//         toClient.close();
+//
+//     }
 
  }
  catch (Exception e1) {
