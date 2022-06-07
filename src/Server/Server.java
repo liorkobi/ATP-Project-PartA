@@ -60,6 +60,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -68,13 +70,17 @@ public class Server {
     private int listeningIntervalMS;
     private IServerStrategy strategy;
     private volatile boolean stop;
-    //private final Logger LOG = LogManager.getLogger(); //Log4j2
+    private ExecutorService threadPool;
+
 
 
     public Server(int port, int listeningIntervalMS, IServerStrategy strategy) {
         this.port = port;
         this.listeningIntervalMS = listeningIntervalMS;
         this.strategy = strategy;
+        this.stop=false;
+        this.threadPool = Executors.newFixedThreadPool(3);
+
     }
 
     public void start() {
@@ -97,14 +103,15 @@ public class Server {
                     //      LOG.info("Client accepted: " + clientSocket.toString());
 
                     // This thread will handle the new Client
-                    new Thread(() -> {
+                    Thread t = new Thread(() -> {
                         handleClient(clientSocket);
-                    }).start();
+                    });
+                    threadPool.execute(t);
 
                 } catch (SocketTimeoutException e){
                  System.out.println("Socket timeout");
                 }
-            }
+            }            threadPool.shutdown();
         } catch (IOException e) {
            // LOG.error("IOException", e);
         }
