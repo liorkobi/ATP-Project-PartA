@@ -12,34 +12,40 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
 
- try {
-        ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
-        ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
+        try {
+            ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
+            ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
+            toClient.flush();
 
-        Maze maze = (Maze)fromClient.readObject();
-        String fileP=System.getProperty("java.io.tmpdir")+maze.toString().hashCode()+"maze";
-        File file=new File(fileP);
+            Maze maze = (Maze) fromClient.readObject();
+            String fileP = System.getProperty("java.io.tmpdir") + maze.toString().hashCode() + "maze";
+            File file = new File(fileP);
 
-        OutputStream outStream = new FileOutputStream(fileP);
-        ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
 
-     if(!file.exists()) {
-         ISearchingAlgorithm i = new BestFirstSearch();
-         ISearchable Smaze = new SearchableMaze(maze);
-         Solution solution = i.solve(Smaze);
-         try {
-             fileObjectOut.writeObject(solution);
-             fileObjectOut.close();
-             outStream.close();
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
-     }
-         toClient.writeObject(fileObjectOut);
-         toClient.flush();
-         fromClient.close();
-         toClient.close();
+            if (!file.exists()) {
+                ISearchable Smaze = new SearchableMaze(maze);
+                ASearchingAlgorithm i = new BestFirstSearch();
+                Solution solution = i.solve(Smaze);
+                toClient.flush();
+                toClient.writeObject(solution);
 
+                FileOutputStream outStream = new FileOutputStream(fileP);
+                ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
+
+                fileObjectOut.writeObject(solution);
+                fileObjectOut.close();
+
+            } else {
+
+                FileInputStream fileN = new FileInputStream(fileP);
+                ObjectInputStream mazeI = new ObjectInputStream(fileN);
+                toClient.writeObject((Solution) mazeI.readObject());
+                mazeI.close();}
+
+                fromClient.close();
+                toClient.close();
+
+        }
 //     }else{
 //         OutputStream outStream = new FileOutputStream(fileP);
 //         ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
@@ -52,7 +58,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 //
 //     }
 
- }
+
  catch (Exception e1) {
      e1.printStackTrace();}
 

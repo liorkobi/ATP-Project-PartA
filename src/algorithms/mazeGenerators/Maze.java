@@ -371,4 +371,25 @@ public class Maze implements Serializable {
 
         return Barr;
     }
+
+    @Override
+    public String toString() {
+        StringBuffer s = new StringBuffer();
+        for (int i = 0; i < row; i++) {
+            s.append("{");
+            for (int j = 0; j < col; j++) {
+                Position pos = new Position(i, j);
+                if (pos.equals(getGoalPosition())) { s.append(" E "); }
+                else if (maze[pos.rowidx][pos.colidx]==1) { s.append(" 1 "); }
+                else if (pos.equals(getStartPosition())) { s.append(" S "); }
+                else if (maze[pos.rowidx][pos.colidx]==0) { s.append(" 0 "); }
+            }
+            s.append("}\n");
+        }
+        return s.toString();
+
+    }
+
+
+
     }
