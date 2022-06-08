@@ -74,6 +74,7 @@ public class Server {
 
 
     /**
+     *
      * Constractor
      * @param port - the port clients can communicate with tis server
      * @param listeningIntervalMS - the time the server is open for requests
