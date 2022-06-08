@@ -25,7 +25,6 @@ public class Solution implements Serializable {
     }
 
     public ArrayList<AState> getSolutionPath() {
-//        Collections.reverse(sol);
         return sol;
     }
 

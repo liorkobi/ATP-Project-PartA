@@ -1,6 +1,7 @@
 package Server;
 import java.io.*;
 
+import IO.MyCompressorOutputStream;
 import algorithms.mazeGenerators.*;
 
 //לשנות לMY
@@ -11,6 +12,13 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
 
     }
 
+    /**
+     * this strategy generate a maze with the size mention in 'fromClient'
+     * with the generator algorithm specified in the configuration file
+     * compress the maze and send it to compress
+     * @param inFromClient
+     * @param outToClient
+     */
     @Override
         public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
             try {
@@ -29,7 +37,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                     mazeGenerator= new EmptyMazeGenerator();
                 Maze maze = mazeGenerator.generate(mazeSize[0],mazeSize[1]);
                 ByteArrayOutputStream outPutStream = new ByteArrayOutputStream();
-                OutputStream out = new SimpleCompressorOutputStream(outPutStream );
+                OutputStream out = new MyCompressorOutputStream(outPutStream );
             try{
                 out.write(maze.toByteArray());
                 out.flush();
