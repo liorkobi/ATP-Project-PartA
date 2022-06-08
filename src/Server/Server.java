@@ -73,7 +73,12 @@ public class Server {
     private ExecutorService threadPool;
 
 
-
+    /**
+     * Constractor
+     * @param port - the port clients can communicate with tis server
+     * @param listeningIntervalMS - the time the server is open for requests
+     * @param strategy - what is my service for the client.
+     */
     public Server(int port, int listeningIntervalMS, IServerStrategy strategy) {
         Configurations conf = Configurations.getInstance();
         String s = conf.getval("threadPoolSize");
@@ -85,24 +90,28 @@ public class Server {
 
     }
 
+    /**
+     * start a thread that waits for the client's acceptance
+     */
     public void start() {
         new Thread(() -> {
             this.startInner();
         }).start();
     }
+
+    /**
+     * ask if any client is interested in me , if exists handle it
+     */
     public void startInner(){
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
             System.out.println("Starting server at port = " + port);
-        //    LOG.info("Starting server at port = " + port);
 
             while (!stop) {
                 try {
                     Socket clientSocket = serverSocket.accept();
                     System.out.println("Client accepted: " + clientSocket.toString());
-
-                    //      LOG.info("Client accepted: " + clientSocket.toString());
 
                     // This thread will handle the new Client
                     Thread t = new Thread(() -> {
@@ -115,22 +124,25 @@ public class Server {
                 }
             }            threadPool.shutdown();
         } catch (IOException e) {
-           // LOG.error("IOException", e);
+            e.printStackTrace();
         }
     }
 
+    /**
+     * apply the appropriate server strategy (match the client request from the client socket).
+     * @param clientSocket
+     */
     private void handleClient(Socket clientSocket) {
         try {
             strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
-           // LOG.info("Done handling client: " + clientSocket.toString());
             clientSocket.close();
-        } catch (IOException e){
-            //LOG.error("IOException", e);
+        } catch (IOException e1){
+            e1.printStackTrace();
+
         }
     }
 
     public void stop(){
-     //   LOG.info("Stopping server...");
         stop = true;
     }
 }

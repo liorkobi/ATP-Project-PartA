@@ -15,6 +15,12 @@ public class MyDecompressorInputStream extends InputStream {
         return 0;
     }
 
+    /**
+     * override the read method in order to decompress as wanted
+     * @param b   the buffer into which the data is read.
+     * @return
+     * @throws IOException
+     */
     @Override
     public int read(byte b[]) throws IOException { //convert decimal number to binary
         int len = b.length;

@@ -17,6 +17,11 @@ public class SimpleCompressorOutputStream extends OutputStream implements Serial
 
     }
 
+    /**
+     * compress the maze by represent  all 1-in-a-row as their sum or 0-in-a-row as their sum
+     * @param b   the data.
+     * @throws IOException
+     */
     @Override
     public void write(byte[] b) throws IOException {
 
@@ -74,6 +79,12 @@ public class SimpleCompressorOutputStream extends OutputStream implements Serial
         out.write(removeBuffer(temp, idx));
     }
 
+    /**
+     * remove the redundant zeros.
+     * @param b - the data
+     * @param i - last index of relevant data
+     * @return
+     */
     private byte[] removeBuffer( byte[] b, int i){
         byte[] Final = new byte[i+2];
         System.arraycopy(b, 0, Final, 0, i+1 );

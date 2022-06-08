@@ -66,12 +66,22 @@ public class Client implements IClientStrategy {
     private int serverPort;
     private IClientStrategy clientStrategy;
 
+    /**
+     *
+     * @param serverIP - ip of the target server
+     * @param serverPort - port of the target server
+     * @param strategy - what do i want the server to do?
+     */
     public Client(InetAddress serverIP, int serverPort, IClientStrategy strategy) {
         this.serverIP = serverIP;
         this.serverPort = serverPort;
         this.clientStrategy = strategy;
     }
 
+    /**
+     * start communication with the server
+     * send to the client strategy the necessary parameters
+     */
     public void communicateWithServer(){
         try(Socket serverSocket = new Socket(serverIP, serverPort)){
             //  System.out.println("connected to server - IP = " + serverIP + ", Port = " + serverPort);
