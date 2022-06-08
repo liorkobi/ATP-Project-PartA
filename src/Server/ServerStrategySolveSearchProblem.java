@@ -36,7 +36,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 Solution solution = i.solve(Smaze);
                 toClient.writeObject(solution);
                 toClient.flush();
-
                 FileOutputStream outStream = new FileOutputStream(fileP);
                 ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
 
@@ -44,7 +43,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 fileObjectOut.close();
 
             } else {
-
                 FileInputStream fileN = new FileInputStream(fileP);
                 ObjectInputStream mazeI = new ObjectInputStream(fileN);
                 toClient.writeObject((Solution) mazeI.readObject());

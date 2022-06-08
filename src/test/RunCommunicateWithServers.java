@@ -19,16 +19,16 @@ public class RunCommunicateWithServers {
 
         //Starting servers
         solveSearchProblemServer.start();
-       mazeGeneratingServer.start();
+     //  mazeGeneratingServer.start();
         //stringReverserServer.start();
 
         //Communicating with servers
-        CommunicateWithServer_MazeGenerating();
+  //      CommunicateWithServer_MazeGenerating();
         CommunicateWithServer_SolveSearchProblem();
         //CommunicateWithServer_StringReverser();
 
         //Stopping all servers
-        mazeGeneratingServer.stop();
+     //   mazeGeneratingServer.stop();
         solveSearchProblemServer.stop();
         //stringReverserServer.stop();
     }
@@ -74,7 +74,7 @@ public class RunCommunicateWithServers {
                                 ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                                 toServer.flush();
                                 MyMazeGenerator mg = new MyMazeGenerator();
-                                Maze maze = mg.generate(3000, 3000);
+                                Maze maze = mg.generate(3, 3);
                                 //maze.print();
                                 toServer.writeObject(maze); //send maze to server
                                 toServer.flush();
