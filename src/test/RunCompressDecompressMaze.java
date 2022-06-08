@@ -1,6 +1,7 @@
 package test;
 import IO.MyCompressorOutputStream;
 //import IO.MyDecompressorInputStream;
+import IO.MyDecompressorInputStream;
 import IO.SimpleCompressorOutputStream;
 import IO.SimpleDecompressorInputStream;
 import algorithms.mazeGenerators.AMazeGenerator;
@@ -13,13 +14,13 @@ public class RunCompressDecompressMaze {
     public static void main(String[] args) {
         String mazeFileName = "savedMaze.maze";
         AMazeGenerator mazeGenerator = new MyMazeGenerator();
-        Maze maze = mazeGenerator.generate(5, 5); //Generate new maze
+        Maze maze = mazeGenerator.generate(1000, 1000); //Generate new maze
         maze.print();
         try {
  //save maze to a file
 //            OutputStream out = new MyCompressorOutputStream(new
 //                    FileOutputStream(mazeFileName));
-            OutputStream out = new SimpleCompressorOutputStream(new
+            OutputStream out = new MyCompressorOutputStream(new
                     FileOutputStream(mazeFileName));
             out.write(maze.toByteArray());
             ; out.flush();
@@ -30,7 +31,7 @@ public class RunCompressDecompressMaze {
         byte savedMazeBytes[] = new byte[0];
         try {
 //read maze from file
-             InputStream in = new SimpleDecompressorInputStream(new
+             InputStream in = new MyDecompressorInputStream(new
                     FileInputStream(mazeFileName));
             savedMazeBytes = new byte[maze.toByteArray().length];
             in.read(savedMazeBytes);
@@ -41,8 +42,8 @@ public class RunCompressDecompressMaze {
             e.printStackTrace();
         }
        Maze loadedMaze = new Maze(savedMazeBytes);
-        System.out.println(Arrays.toString(loadedMaze.toByteArray()));
-        System.out.println(Arrays.toString(maze.toByteArray()));
+       // System.out.println(Arrays.toString(loadedMaze.toByteArray()));
+        //System.out.println(Arrays.toString(maze.toByteArray()));
         boolean areMazesEquals =
                 Arrays.equals(loadedMaze.toByteArray(),maze.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals));

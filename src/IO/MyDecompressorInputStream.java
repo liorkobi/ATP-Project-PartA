@@ -17,11 +17,14 @@ public class MyDecompressorInputStream extends InputStream {
 
     @Override
     public int read(byte b[]) throws IOException { //convert decimal number to binary
-        int idx = 0;
         int len = b.length;
         byte[] compress_IN = in.readAllBytes();
+        int idx = compress_IN[compress_IN.length - 1];
 
-        for (int j = 0; j < compress_IN.length; j++) {
+        System.arraycopy(compress_IN, 0, b, 0, (compress_IN[compress_IN.length - 1]));
+
+
+        for (int j = compress_IN[compress_IN.length - 1]; j < compress_IN.length; j++) {
             int number = compress_IN[j];
             if (number < 0){
                 number = 256 + number ;

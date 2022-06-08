@@ -16,26 +16,14 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm , Seria
     }
 
     protected void TheShortestPath(ISearchable p, Solution S, AState curr) {
-//        if (curr == p.getStart()) {
-//            S.setSol(p.getStart());
-//        } else {
-            Queue<AState> Parents = new LinkedList<>();
-            Parents.add(curr);
-            while (!Parents.isEmpty()) {
-                curr = Parents.poll();
+        if (curr==p.getStart()) {
+            S.setSol(p.getStart());
+        }
+        else {
+            if (curr.getParent()!=null){
                 S.setSol(curr);
-                if (curr.getParent() != null) {
-                    Parents.add(curr.getParent());
-                }
-            }
-//        if (curr==p.getStart()) {
-//            S.setSol(p.getStart());
-//        }
-//        else {
-//            if (curr.getParent()!=null){
-//                S.setSol(curr);
-//                TheShortestPath(p,S,curr.getParent());}
-//        }
+                TheShortestPath(p,S,curr.getParent());}
+        }
         }
 
 

@@ -11,12 +11,21 @@ import java.util.Collections;
 public class Solution implements Serializable {
     ArrayList<AState> sol;
 
-    public Solution() {
-        sol=new ArrayList<AState>();
+    public Solution(AState start, AState goal) {
+
+        sol = new ArrayList<AState>();
+        sol.add(goal);
+        AState tmp = goal.getParent();
+        while(tmp != null){
+            sol.add(tmp);
+            tmp = tmp.getParent();
+        }
+        Collections.reverse(sol);
+
     }
 
     public ArrayList<AState> getSolutionPath() {
-        Collections.reverse(sol);
+//        Collections.reverse(sol);
         return sol;
     }
 
@@ -24,4 +33,7 @@ public class Solution implements Serializable {
         sol.add(state);
     }
 
+    public ArrayList<AState> getSol() {
+        return sol;
+    }
 }

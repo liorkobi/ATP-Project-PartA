@@ -75,11 +75,13 @@ public class Server {
 
 
     public Server(int port, int listeningIntervalMS, IServerStrategy strategy) {
+        Configurations conf = Configurations.getInstance();
+        String s = conf.getval("threadPoolSize");
         this.port = port;
         this.listeningIntervalMS = listeningIntervalMS;
         this.strategy = strategy;
         this.stop=false;
-        this.threadPool = Executors.newFixedThreadPool(3);
+        this.threadPool = Executors.newFixedThreadPool(Integer.parseInt(s));
 
     }
 

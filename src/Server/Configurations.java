@@ -10,7 +10,7 @@ import java.util.Properties;
  * Singleton class of Configuration file
  */
 public class Configurations {
-    private static Configurations configurations = new Configurations();
+    private static Configurations configurations=null;
     Properties prop;
 
     private Configurations() {
@@ -29,17 +29,20 @@ public class Configurations {
 
     public String getval(String key){
         try{
-            InputStream input = new FileInputStream("config.properties");
+            InputStream input = new FileInputStream("resources/config.properties");
             Properties prop = new Properties();
             prop.load(input);
         }catch (IOException ex) {
             ex.printStackTrace();
         }
-    return prop.getProperty(key);}
+        return prop.getProperty(key);}
 
 
 
     public static Configurations getInstance() {
+        if( configurations==null){
+            configurations=new Configurations();
+        }
         return configurations;
     }
 
@@ -53,7 +56,7 @@ public class Configurations {
         }catch (IOException ex2) {
             ex2.printStackTrace();
         }
-        }
+    }
 
 
 
