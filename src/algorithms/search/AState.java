@@ -1,10 +1,12 @@
 package algorithms.search;
 
+import java.io.Serializable;
+
 /**
  * state of a searchable problem
  * color represents the status of the state during the solving process.
  */
-public abstract class AState {
+public abstract class AState implements Serializable {
 
      public enum color {white, gray, black}
 

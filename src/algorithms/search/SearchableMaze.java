@@ -2,9 +2,10 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Maze;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SearchableMaze implements ISearchable,Cloneable{
+public class SearchableMaze implements ISearchable,Cloneable, Serializable {
 
     Maze m;
     MazeState[][] V2D;
