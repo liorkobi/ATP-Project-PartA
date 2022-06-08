@@ -53,8 +53,8 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     public Solution solve(ISearchable domain) {
         if(domain.getStart()==null){return null;}
         ISearchable p = DFS(domain);
-        Solution S = new Solution();
-        TheShortestPath(p, S, p.getGoal());
+        Solution S = new Solution(domain.getStart(), domain.getGoal());
+   //     TheShortestPath(p, S, p.getGoal());
         return S;
     }
 

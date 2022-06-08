@@ -24,10 +24,18 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
             if (!file.exists()) {
                 ISearchable Smaze = new SearchableMaze(maze);
-                ASearchingAlgorithm i = new BestFirstSearch();
+                Configurations conf = Configurations.getInstance();
+                String search = conf.getval("mazeSearchingAlgorithm");
+                ASearchingAlgorithm i;
+                if (search.equals("Breadth")) // solves via the algorithm that is written in the configuration file
+                    i = new BreadthFirstSearch();
+                else if (search.equals("DFS"))
+                     i = new DepthFirstSearch();
+                else
+                   i = new BestFirstSearch();
                 Solution solution = i.solve(Smaze);
-                toClient.flush();
                 toClient.writeObject(solution);
+                toClient.flush();
 
                 FileOutputStream outStream = new FileOutputStream(fileP);
                 ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
@@ -65,4 +73,3 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
         }
         }
-
