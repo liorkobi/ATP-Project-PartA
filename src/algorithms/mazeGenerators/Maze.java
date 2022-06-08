@@ -389,7 +389,4 @@ public class Maze implements Serializable {
         return s.toString();
 
     }
-
-
-
     }
