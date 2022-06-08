@@ -9,6 +9,14 @@ import algorithms.search.*;
 import java.io.*;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
+
+    /**
+     * this strategy solve Maze from 'fromClient' with the searching algorithm specified in the config file
+     * gives the maze a uniqe name and save it and its solution in a file for future use.
+     * the strategy will never solve the same Maze twice ' it will use yhe solution from the file if exists.
+     * @param inFromClient
+     * @param outToClient
+     */
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
 
@@ -54,17 +62,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 toClient.close();
 
         }
-//     }else{
-//         OutputStream outStream = new FileOutputStream(fileP);
-//         ObjectOutputStream fileObjectOut = new ObjectOutputStream(outStream);
-//         toClient.writeObject(fileObjectOut);
-//         fileObjectOut.close();
-//         outStream.close();
-//         toClient.flush();
-//         fromClient.close();
-//         toClient.close();
-//
-//     }
 
 
  catch (Exception e1) {

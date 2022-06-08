@@ -17,12 +17,15 @@ public class SimpleDecompressorInputStream extends InputStream {
         return 0;
     }
 
+    /**
+     *
+     * @param Final   the buffer into which the data is read.
+     * @return
+     * @throws IOException
+     */
     @Override
     public int read(byte[] Final) throws IOException {
         byte[] b = in.readAllBytes();
-        int row=0;
-        int col=0;
-        int i=0;
         System.arraycopy(b, 0, Final, 0, (b[b.length - 1]));
         boolean bool=true;
         int pointer=b[b.length - 1];

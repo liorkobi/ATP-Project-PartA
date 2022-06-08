@@ -13,6 +13,10 @@ public class Configurations {
     private static Configurations configurations=null;
     Properties prop;
 
+    /**
+     * constractor
+     * create a configuration file and initialize it with default values.
+     */
     private Configurations() {
         try {
             OutputStream output = new FileOutputStream("resources/config.properties");
@@ -27,6 +31,11 @@ public class Configurations {
         }
     }
 
+    /**
+     * with given key these method returns its value from the config file
+     * @param key
+     * @return
+     */
     public String getval(String key){
         try{
             InputStream input = new FileInputStream("resources/config.properties");
@@ -38,7 +47,10 @@ public class Configurations {
         return prop.getProperty(key);}
 
 
-
+    /**
+     * keep this class as singleton
+     * @return
+     */
     public static Configurations getInstance() {
         if( configurations==null){
             configurations=new Configurations();
@@ -46,6 +58,12 @@ public class Configurations {
         return configurations;
     }
 
+    /**
+     * these method allows the user to edit the configuration file with values of its own
+     * must be corresponding to the strategies checks
+     * @param key
+     * @param val
+     */
     public void setProperty(String key , String val) {
 
         try{
