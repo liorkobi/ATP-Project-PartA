@@ -19,11 +19,14 @@ public class MyCompressorOutputStream extends OutputStream {
     @Override
     public void write(byte[] b) throws IOException { //each 8 "bits" will perform as byte
         int c = 0;
-        int idx = 0;
+        int idx = b[b.length - 1];
         int size = (int) Math.ceil(b.length/8.0) ;
+        size+= b[b.length - 1];
         byte[] tmp = new byte[size];
+        tmp[size-1] = (byte) b[b.length - 1];
+        System.arraycopy(b, 0, tmp, 0, b[b.length - 1]-1);
 
-        for (int i = 0; i < b.length; i = i+8) {
+        for (int i =  b[b.length - 1]; i < b.length; i = i+8) {
             byte newNum = binTOdec(b, i);
             tmp[idx] = newNum;
             idx++;

@@ -45,8 +45,10 @@ public int getNumberOfNodesEvaluated(){
     public Solution solve(ISearchable domain){
         if(domain.getStart()==null){return null;}
         ISearchable p=BFS(domain);
-        Solution S=new Solution();
-        TheShortestPath(p,S,p.getGoal());
+        Solution S=new Solution(p.getStart(), p.getGoal());
+     //  TheShortestPath(p,S,p.getGoal());
+        //for (int i=0;i<S.getSol().size();i++){S.getSol().get(i).setParent(null);}
+        System.out.println(S.getSol().size());
         return S;
 
 }

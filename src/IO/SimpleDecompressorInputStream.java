@@ -23,15 +23,6 @@ public class SimpleDecompressorInputStream extends InputStream {
         int row=0;
         int col=0;
         int i=0;
-//        while (b[i] != 0) {
-//            row += (b[i] & 0xFF);
-//            i++;
-//        }
-//        while (b[i+1] != 0) {
-//            col += (b[i+1] & 0xFF);
-//        }
-//        byte[] Final = new byte[b[b.length-1]+row*col];
-
         System.arraycopy(b, 0, Final, 0, (b[b.length - 1]));
         boolean bool=true;
         int pointer=b[b.length - 1];
